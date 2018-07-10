@@ -1,15 +1,16 @@
-# C1.18_connectathon
+# C6.18_connectathon
 
 Scope: 
-- Make a connect 4 game
-  - basic rule description: https://en.wikipedia.org/wiki/Connect_Four#Gameplay
+- Make a Checkers game
+  - basic rule description: https://en.wikipedia.org/wiki/Draughts#General_rules
   - at least 2 players
-  - at least 7x6 board size
+  - at least 8x8 board size
   - players alternate in some way or form
 - Additional requirements:
-  - must be able to pick any height of a column and have the chip placed at the right height
+  - must have at least one special piece, move, or power-up
   - players must be able to choose which symbol they use for their chips
-  - dropping must animate
+  - piece movement (both forward/backward and diagonal) must animate
+  - Multi-jump is not a required feature
  
  
 Mystery requirement: 
@@ -18,28 +19,32 @@ Mystery requirement:
 ### Teams
 
 #### Team 1
-- Li Zhang
-- Brian Morris
-- Parker Rebensdorf
+- Sean Prouty
+- Mike Yim
+- Sudip Baral
 
 #### Team 2
-- Ryan Soto
-- Duy Nguyen
-- Jean Paul Olukemi
+- Leah Choi
+- Jake Taylor
+- Andrew Oatu
 
 #### Team 3
-- Harrison Truong
-- Nolan Emerson
-- David Forman
-- Sasha Ross
+- Federico Lische
+- Howard Kim
+- Matthew Kirby
 
 #### Team 4
-- William Cheng
-- Hanran Kim
-- Jeffrei Cher
-- Matthew Kane
+- Kevin Young
+- Rebecca Martin
+- Joshua Sohn
+- Dustin Dubia
 
 #### Team 5
-- Keaton Kreiger
-- Alejandro Gaspar
-- Evan Ippolito
+- John Carlisle
+- Kris Chanthasiriphan
+- Andrew Moser
+
+#### Team 6
+- Tien Pham
+- Ryan Kang
+- Paul Su
