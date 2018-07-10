@@ -7,10 +7,10 @@ Scope:
   - at least 8x8 board size
   - players alternate in some way or form
 - Additional requirements:
-  - must have at least one special piece, move, or power-up
   - players must be able to choose which symbol they use for their chips
-  - piece movement (both forward/backward and diagonal) must animate
-  - Multi-jump is not a required feature
+  - standard pieces only move forward
+  - 'kinged pieces' can move backwards
+  - Multi-jump is NOT a required feature.  IS NOT. You DO NOT have to do it.  
  
  
 Mystery requirement: 
