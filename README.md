@@ -20,7 +20,7 @@ Mystery requirement:
 
 #### Team 1
 - Sean Prouty
-- Mike Yim
+- Federico Lische
 - Sudip Baral
 
 #### Team 2
@@ -29,7 +29,7 @@ Mystery requirement:
 - Andrew Oatu
 
 #### Team 3
-- Federico Lische
+- Mike Yim
 - Howard Kim
 - Matthew Kirby
 
@@ -37,7 +37,6 @@ Mystery requirement:
 - Kevin Young
 - Rebecca Martin
 - Joshua Sohn
-- Dustin Dubia
 
 #### Team 5
 - John Carlisle
