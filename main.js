@@ -44,9 +44,11 @@ function possibleMoves(x,y) {
     debugger;
     possibleMovesArray = []; //reset global array
     currentPosition = $(this).attr("coordinate");
+    
     console.log("coordinate that I clicked: ", currentPosition);
     var x = parseInt(currentPosition[0]);
     var y = parseInt(currentPosition[1]);
+    //this.off();
     //playerOne's movements, go up the board
     if (boardArray[x][y] === 1) {
         playerOneMovement(x,y);
@@ -61,20 +63,22 @@ function possibleMoves(x,y) {
 //subfunction to monitor player one movement
 function playerOneMovement(x,y) {
     //check if both spots are empty
-    if (boardArray[x - 1][y + 1] === 0 && boardArray[x - 1][y - 1] === 0) {
+    debugger;
+    if (boardArray[x - 1][y - 1] === 0 && boardArray[x - 1][y + 1] === 0) {
         var firstCoordinate = "" + (x - 1) + (y - 1);
         var secondCoordinate = "" + (x - 1) + (y + 1);
         possibleMovesArray.push(firstCoordinate, secondCoordinate);
         console.log("possibleMovesArray: ", possibleMovesArray);
     }
     //if piece cant make a left movement but can make right
-    if (boardArray[x - 1][y + 1] !== 0 && boardArray[x - 1][y - 1] === 0) {
+    if (boardArray[x - 1][y - 1] !== 0 && boardArray[x - 1][y + 1] === 0) {
+        debugger;
         var firstCoordinate = "" + (x - 1) + (y + 1);
         possibleMovesArray.push(firstCoordinate);
         console.log("possibleMovesArray: ", possibleMovesArray);
     }
     //if piece cant make a right movement can make left
-    if (boardArray[x - 1][y + 1] !== 0 && boardArray[x - 1][y - 1] === 0) {
+    if (boardArray[x - 1][y - 1] === 0 && boardArray[x - 1][y + 1] !== 0) {
         var firstCoordinate = "" + (x - 1) + (y - 1);
         possibleMovesArray.push(firstCoordinate);
         console.log("possibleMovesArray: ", possibleMovesArray);
@@ -84,21 +88,21 @@ function playerOneMovement(x,y) {
 //subfunction to monitory player two movement
 function playerTwoMovement(x,y) {
     //check if both spots are empty
-    if (boardArray[x + 1][y - 1] === 0 && boardArray[x + 1][y + 1] === 0) {
+    if (boardArray[x + 1][y + 1] === 0 && boardArray[x + 1][y - 1] === 0) {
         var firstCoordinate = "" + (x + 1) + (y + 1);
         var secondCoordinate = "" + (x + 1) + (y - 1);
         possibleMovesArray.push(firstCoordinate, secondCoordinate);
         console.log("possibleMovesArray: ", possibleMovesArray);
     }
     //if piece cant make a left movement but can make right
-    if (boardArray[x + 1][y - 1] !== 0 && boardArray[x + 1][y + 1] === 0) {
-        var firstCoordinate = "" + (x - 1) + (y + 1);
+    if (boardArray[x + 1][y + 1] !== 0 && boardArray[x + 1][y - 1] === 0) {
+        var firstCoordinate = "" + (x + 1) + (y - 1);
         possibleMovesArray.push(firstCoordinate);
         console.log("possibleMovesArray: ", possibleMovesArray);
     }
     //if piece cant make a right movement can make left
-    if (boardArray[x + 1][y - 1] === 0 && boardArray[x + 1][y + 1] !== 0) {
-        var firstCoordinate = "" + (x - 1) + (y - 1);
+    if (boardArray[x + 1][y + 1] === 0 && boardArray[x + 1][y - 1] !== 0) {
+        var firstCoordinate = "" + (x + 1) + (y + 1);
         possibleMovesArray.push(firstCoordinate);
         console.log("possibleMovesArray: ", possibleMovesArray);
     }
