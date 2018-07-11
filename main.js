@@ -49,9 +49,10 @@ function createBoard(){
     for(var row = 0; row < boardSize.rows; row++){
         var rowDiv = $("<div>", {class: "row"});
         for(var col = 0; col < boardSize.cols; col++){
-            var squareDiv = $("<div>", {class: "square"});
+            var squareDiv = $("<div>", {class: "square", x: row, y: col});
             if((row+col)%2 === 0){
                 squareDiv.addClass("light");
+                squareDiv.addClass("blackPiece");
             }
             else{
                 squareDiv.addClass("dark");
