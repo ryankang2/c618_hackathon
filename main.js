@@ -96,14 +96,6 @@ function move(){
    
 }
 
-//remove the triangle/circle class
-function displayDelete(currentPosition){
-   currentPosition.removeClass(".triangle");
-    }
-function displayAdd() {
-    
-}
-
 
 
 
