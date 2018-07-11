@@ -19,7 +19,7 @@ class Piece{
     jumpOver(){
         
     }
-    
+
 
     
 }
@@ -32,6 +32,7 @@ function applyClickHandlers(){
 
 }
 
+//function to dynamically 
 function createBoard(){
     for(var row = 0; row < boardSize.rows; row++){
         var rowDiv = $("<div>", {class: "row"});
