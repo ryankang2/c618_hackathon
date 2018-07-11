@@ -1,30 +1,5 @@
 $(document).ready(initializeApp);
 
-<<<<<<< HEAD
-var gameBoard = null;       //8x8 gameboard that's dynamically created
-var boardSize = { rows: 8, cols: 8};
-var testPiece = new Piece('black', true); 
-
-class Piece{
-    //color -> which player, isKing -> is the piece a king piece or not
-    //isAlive -> true if on board, false if not
-    constructor(color, isKing){
-        this.color = color;
-        this.isKing = isKing;
-    }
-    //function to jump onto a diagonal square
-    possibleMoves() { //shows possibles choices
-    // var xLocation = $(event.target.parentElement).attr('x');
-    // var yLocation =  $(event.target.parentElement).attr('y');
-    // console.log(xLocation, "+" , yLocation);
-    console.log('here');
-    }
-    move(){ //physically moves the pieces 
-        if (this.color = "black") { 
-            $('')
-        }
-    }
-=======
 var gameBoard = null; //8x8 gameboard that's dynamically created
 var boardSize = {
     rows: 8,
@@ -34,7 +9,7 @@ var boardSize = {
 var playerOneTokens = 12;
 var playerTwoTokens = 12;
 
->>>>>>> e6226aa93039172d49d620301e232369961f3410
+
 
 //0-> empty spaces 1-> playerOne     2-> playerTwo      3-> kingPlayerOne   4-> kingPlayerTwo
 var boardArray = [
@@ -43,9 +18,9 @@ var boardArray = [
     [0, 1, 0, 1, 0, 1, 0, 1],
     [0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0],
-    [2, 0, 2, 0, 2, 0, 2, 0],
-    [0, 2, 0, 2, 0, 2, 0, 2],
-    [2, 0, 2, 0, 2, 0, 2, 0],
+    [1, 0, 1, 0, 1, 0, 1, 0],
+    [0, 1, 0, 1, 0, 1, 0, 1],
+    [1, 0, 1, 0, 1, 0, 1, 0],
 ];
 
 function initializeApp() {
@@ -72,16 +47,22 @@ function move(){
 }
 
 //remove the triangle/circle class
-function display(){
+function displayDelete(currentPosition){
+   currentPosition.removeClass(".triangle");
+    }
+function displayAdd() {
+    .addClass(".circle" );
+}
+
 
 }
 
-<<<<<<< HEAD
+
 function applyClickHandlers(){
   $('.square').click(testPiece.possibleMoves());
-=======
+
 function jump(){
->>>>>>> e6226aa93039172d49d620301e232369961f3410
+
 
 }
 
