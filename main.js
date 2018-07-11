@@ -75,31 +75,42 @@ function possibleMoves(){
 
 //with the possible moves, take one route, update the boardArray, replace current position with 0 
 //update the movement with 1 or 2
-function move(position){
+function move(){
     //position -> new position that we clicked on...the spot we want to move to
-    position = $(this).attr("coordinate");
-    var x = parseInt(position[0]);
-    var y = parseInt(position[1]);
-    var thisX = parseInt(clickedPosition[0]);
-    var thisY = parseInt(clickedPosition[1]);
+    var position = $(this).attr("coordinate");
+    var thisX = parseInt(position[0]);
+    var thisY = parseInt(position[1]);
+    var lastPosition = parseInt(currentPosition[0]);
+    var lastX = parseInt(lastPosition[0]);
+    var lastY = parseInt(lastPosition[1]);
     if (playerTurn === 0) {
-        boardArray[x][y] = 1;
-        $(".square").attr("coordinate", x + "" + y).addClass(".trianglePiece");
-        boardArray[thisX][thisY] = 0;
-        $(".trianglePiece").attr("coordinate", x + "" + y).removeClass(".trianglePiece");
+        boardArray[lastX][lastY] = 0;
+        boardArray[thisX][thisY] = 1;
+        $(".trianglePiece").attr("coordinate", lastX + "" + lastY).removeClass(".trianglePiece");
+        $(".square").attr("coordinate", thisX + "" + thisY).addClass(".trianglePiece");
         playerTurn = 1 - playerTurn;
     } else {
-        boardArray[x][y] = 2;
-        $(".square").attr("coordinate", x + "" + y).addClass(".ciclePiece");
-        boardArray[thisX][thisY] = 0;
-        $(".trianglePiece").attr("coordinate", x + "" + y).removeClass(".circlePiece");
+        boardArray[lastX][lastY] = 0;
+        boardArray[thisX][thisY] = 2;
+        $(".trianglePiece").attr("coordinate", lastX + "" + lastY).removeClass(".circlePiece");
+        $(".square").attr("coordinate", thisX + "" + thisY).addClass(".circlePiece");
         playerTurn = 1 - playerTurn;
     }
 }
 
 //go thru possibleMovesArray, apply clickhandlers to those coordinates in array, highlight them on DOM 
-function applyClickToPossible(){
-    
+
+function applyClickToPossible() {
+    // splitting x and y
+    var firstCoordinate = possibleMovesArray[0];
+    var secondCoordinate = possibleMovesArray[1];
+    var firstX = parseInt(firstCoordinate[0]);
+    var firstY = parseInt(firstCoordinate[1]);
+    var secondX = parseInt(secondCoordinate[0]);
+    var secondY = parseInt(secondCoordinate[1]);
+    // adding click
+    $(".square").attr("coordinate", firstX + "" + firstY).click(move);;
+    $(".square").attr("coordinate", secondX + "" + secondY).click(move);
 }
 
 //remove the triangle/circle class
