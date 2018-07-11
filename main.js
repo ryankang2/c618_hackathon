@@ -12,8 +12,16 @@ class Piece{
         this.isKing = isKing;
     }
     //function to jump onto a diagonal square
-    move(){
-
+    possibleMoves() { //shows possibles choices
+    // var xLocation = $(event.target.parentElement).attr('x');
+    // var yLocation =  $(event.target.parentElement).attr('y');
+    // console.log(xLocation, "+" , yLocation);
+    console.log('here');
+    }
+    move(){ //physically moves the pieces 
+        if (this.color = "black") { 
+            $('')
+        }
     }
 
     //function to "eat" another piece, call this in the move function
@@ -30,6 +38,7 @@ function initializeApp(){
 }
 
 function applyClickHandlers(){
+  $('.square').click(possibleMoves);
 
 }
 
