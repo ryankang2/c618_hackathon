@@ -43,6 +43,26 @@ function possibleMoves(){
     var y = parseInt(currentPosition[1]);
     //playerOne's movements, go up the board
     if(boardArray[x][y] === 1){
+        var possibleArray = [];
+        //check if both spots are empty
+        if(boardArray[x-1][y+1] === 0 && boardArray[x-1][y-1] === 0){
+            var firstCoordinate = "" + (x-1) + (y-1);
+            var secondCoordinate = "" + (x-1) + (y+1);
+            possibleArray.push(firstCoordinate, secondCoordinate);
+            console.log("possibleArray: ", possibleArray);
+        }
+        //if piece cant make a left movement but can make right
+        if(typeof boardArray[x-1][y-1] == "undefined" && boardArray[x-1][y+1] === 0){
+            var firstCoordinate = "" + (x-1) + (y+1);
+            possibleArray.push(firstCoordinate);
+            console.log("possibleArray: ", possibleArray);
+        }
+        //if piece cant make a right movement can make right
+        if(typeof boardArray[x+1][y+1] == "undefined" && boardArray[x-1][y-1] === 0){
+            var firstCoordinate = "" + (x-1) + (y-1);
+            possibleArray.push(firstCoordinate);
+            console.log("possibleArray: ", possibleArray);
+        }
 
     }
     //playerTwo's movements, go down the board
@@ -81,20 +101,9 @@ function displayDelete(currentPosition){
    currentPosition.removeClass(".triangle");
     }
 function displayAdd() {
-    .addClass(".circle" );
+    
 }
 
-
-}
-
-
-function applyClickHandlers(){
-  $('.square').click(testPiece.possibleMoves());
-
-function jump(){
-
-
-}
 
 
 
