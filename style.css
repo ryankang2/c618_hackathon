@@ -58,3 +58,9 @@ img {
     display: flex;
     height: 12.5%;
 }
+
+.blackPiece{
+    background-image: url("img/blackPiece.jpg");
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
