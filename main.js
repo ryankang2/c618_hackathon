@@ -63,6 +63,10 @@ function move(position){
     }
 }
 
+function applyClickToPossible() {
+    
+}
+
 //remove the triangle/circle class
 function display(){
 
