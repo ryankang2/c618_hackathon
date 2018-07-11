@@ -5,6 +5,7 @@ var boardSize = {
     rows: 8,
     cols: 8
 };
+var possibleMovesArray = [];
 
 var playerOneTokens = 12;
 var playerTwoTokens = 12;
@@ -35,6 +36,7 @@ function applyClickHandlers() {
 }
 
 function possibleMoves(){
+    possibleMovesArray = [];    //reset global array
     var currentPosition = $(this).attr("coordinate");
     console.log("coordinate that I clicked: ", currentPosition);
     var x = parseInt(currentPosition[0]);
@@ -45,25 +47,24 @@ function possibleMoves(){
     }
     //playerTwo's movements, go down the board
     if(boardArray[x][y] === 2){
-        var possibleArray = [];
         //check if both spots are empty
         if(boardArray[x+1][y-1] === 0 && boardArray[x+1][y+1] === 0){
             var firstCoordinate = "" + (x+1) + (y+1);
             var secondCoordinate = "" + (x+1) + (y-1);
-            possibleArray.push(firstCoordinate, secondCoordinate);
-            console.log("possibleArray: ", possibleArray);
+            possibleMovesArray.push(firstCoordinate, secondCoordinate);
+            console.log("possibleArray: ", possibleMovesArray);
         }
         //if piece cant make a left movement but can make right
         if(typeof boardArray[x+1][y-1] == "undefined" && boardArray[x+1][y+1] === 0){
             var firstCoordinate = "" + (x+1) + (y+1);
-            possibleArray.push(firstCoordinate);
-            console.log("possibleArray: ", possibleArray);
+            possibleMovesArray.push(firstCoordinate);
+            console.log("possibleArray: ", possibleMovesArray);
         }
         //if piece cant make a right movement can make right
         if(typeof boardArray[x+1][y+1] == "undefined" && boardArray[x+1][y-1] === 0){
             var firstCoordinate = "" + (x+1) + (y-1);
-            possibleArray.push(firstCoordinate);
-            console.log("possibleArray: ", possibleArray);
+            possibleMovesArray.push(firstCoordinate);
+            console.log("possibleArray: ", possibleMovesArray);
         }
     }
 }
