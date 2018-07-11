@@ -98,7 +98,7 @@ function move(position){
 }
 
 //go thru possibleMovesArray, apply clickhandlers to those coordinates in array, highlight them on DOM 
-function applyClickToPossible() {
+function applyClickToPossible(){
     
 }
 
