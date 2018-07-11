@@ -28,7 +28,7 @@ body {
 }
 
 .gameBoard {
-    width: 60%;
+    width: 48%;
     height: 95%;
     display: inline-block;
     border: 1px solid white;
@@ -41,11 +41,11 @@ img {
 }
 
 .light {
-    background-color: #e4bf7f;
+    background-color: #09CEEC;
 }
 
 .dark {
-    background-color: #755c30;
+    background-color: black;
 }
 
 .square {
