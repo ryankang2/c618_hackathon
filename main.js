@@ -39,8 +39,12 @@ function possibleMoves(){
     console.log("coordinate that I clicked: ", currentPosition);
     var x = parseInt(currentPosition[0]);
     var y = parseInt(currentPosition[1]);
-    //playerOne's movements, go down the board
+    //playerOne's movements, go up the board
     if(boardArray[x][y] === 1){
+
+    }
+    //playerTwo's movements, go down the board
+    if(boardArray[x][y] === 2){
         var possibleArray = [];
         //check if both spots are empty
         if(boardArray[x+1][y-1] === 0 && boardArray[x+1][y+1] === 0){
@@ -50,15 +54,17 @@ function possibleMoves(){
             console.log("possibleArray: ", possibleArray);
         }
         //if piece cant make a left movement but can make right
-        if(typeof boardArray[x+1][y-1] === undefined && boardArray[x+1][y+1] === 0){
+        if(typeof boardArray[x+1][y-1] == "undefined" && boardArray[x+1][y+1] === 0){
             var firstCoordinate = "" + (x+1) + (y+1);
             possibleArray.push(firstCoordinate);
-
+            console.log("possibleArray: ", possibleArray);
         }
-    }
-    //playerTwo's movements, go up the board
-    if(boardArray[x][y] === 2){
-
+        //if piece cant make a right movement can make right
+        if(typeof boardArray[x+1][y+1] == "undefined" && boardArray[x+1][y-1] === 0){
+            var firstCoordinate = "" + (x+1) + (y-1);
+            possibleArray.push(firstCoordinate);
+            console.log("possibleArray: ", possibleArray);
+        }
     }
 }
 
