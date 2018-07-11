@@ -5,6 +5,7 @@ var boardSize = {
     rows: 8,
     cols: 8
 };
+var possibleMovesArray = [];
 
 // 0 = player 1 turn, 1 = player 2 turn;
 var playerTurn = 0;
@@ -13,14 +14,14 @@ var playerTwoTokens = 12;
 
 //0-> empty spaces 1-> playerOne     2-> playerTwo      3-> kingPlayerOne   4-> kingPlayerTwo
 var boardArray = [
-    [0, 1, 0, 1, 0, 1, 0, 1],
-    [1, 0, 1, 0, 1, 0, 1, 0],
-    [0, 1, 0, 1, 0, 1, 0, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [2, 0, 2, 0, 2, 0, 2, 0],
     [0, 2, 0, 2, 0, 2, 0, 2],
     [2, 0, 2, 0, 2, 0, 2, 0],
+    [0, 2, 0, 2, 0, 2, 0, 2],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 0, 1, 0, 1, 0, 1, 0],
+    [0, 1, 0, 1, 0, 1, 0, 1],
+    [1, 0, 1, 0, 1, 0, 1, 0],
 ];
 
 function initializeApp() {
@@ -32,12 +33,41 @@ function initializeApp() {
 
 
 function applyClickHandlers() {
-    $('.square').click(possibleMoves);
+    $(".square.dark").click(possibleMoves);
 }
 
 function possibleMoves(){
-    var x = $(".square").x;
-    var y = $(".square").y;
+    possibleMovesArray = [];    //reset global array
+    var currentPosition = $(this).attr("coordinate");
+    console.log("coordinate that I clicked: ", currentPosition);
+    var x = parseInt(currentPosition[0]);
+    var y = parseInt(currentPosition[1]);
+    //playerOne's movements, go up the board
+    if(boardArray[x][y] === 1){
+
+    }
+    //playerTwo's movements, go down the board
+    if(boardArray[x][y] === 2){
+        //check if both spots are empty
+        if(boardArray[x+1][y-1] === 0 && boardArray[x+1][y+1] === 0){
+            var firstCoordinate = "" + (x+1) + (y+1);
+            var secondCoordinate = "" + (x+1) + (y-1);
+            possibleMovesArray.push(firstCoordinate, secondCoordinate);
+            console.log("possibleArray: ", possibleMovesArray);
+        }
+        //if piece cant make a left movement but can make right
+        if(typeof boardArray[x+1][y-1] == "undefined" && boardArray[x+1][y+1] === 0){
+            var firstCoordinate = "" + (x+1) + (y+1);
+            possibleMovesArray.push(firstCoordinate);
+            console.log("possibleArray: ", possibleMovesArray);
+        }
+        //if piece cant make a right movement can make right
+        if(typeof boardArray[x+1][y+1] == "undefined" && boardArray[x+1][y-1] === 0){
+            var firstCoordinate = "" + (x+1) + (y-1);
+            possibleMovesArray.push(firstCoordinate);
+            console.log("possibleArray: ", possibleMovesArray);
+        }
+    }
 }
 
 //with the possible moves, take one route, update the boardArray, replace current position with 0 
@@ -89,8 +119,7 @@ function createBoard() {
         for (var col = 0; col < boardSize.cols; col++) {
             var squareDiv = $("<div>", {
                 class: "square",
-                x: row,
-                y: col
+                coordinate: row + "" + col,
             });
             //check if board square is blue
             if ((row + col) % 2 === 0) {
