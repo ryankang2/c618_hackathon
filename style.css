@@ -2,7 +2,7 @@ body {
     width: 100vw;
     height: 100vh;
     margin: 0;
-    background-color: ;
+    background-color: black;
     /* background-image: url(img/building.png);
     background-repeat: no-repeat;
     background-size: cover; */
@@ -24,14 +24,14 @@ body {
     width: 10%;
     height: 95%;
     display: inline-block;
-    border: 1px solid black;
+    border: 1px solid white;
 }
 
 .gameBoard {
     width: 60%;
     height: 95%;
     display: inline-block;
-    border: 1px solid black;
+    border: 1px solid white;
 }
 
 img {
