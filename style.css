@@ -59,8 +59,14 @@ img {
     height: 12.5%;
 }
 
-.blackPiece{
-    background-image: url("img/blackPiece.jpg");
+.trianglePiece{
+    background-image: url("img/triangle.png");
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+
+.circlePiece{
+    background-image: url("img/circle.png");
     background-repeat: no-repeat;
     background-size: cover; 
 }
