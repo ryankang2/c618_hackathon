@@ -6,6 +6,7 @@ var boardSize = {
     cols: 8
 };
 var possibleMovesArray = [];
+var currentPosition =  null;
 
 // 0 = player 1 turn, 1 = player 2 turn;
 var playerTurn = 0;
@@ -36,9 +37,10 @@ function applyClickHandlers() {
     $(".square.dark").click(possibleMoves);
 }
 
+//populates the possibleMovesArray
 function possibleMoves(){
     possibleMovesArray = [];    //reset global array
-    var currentPosition = $(this).attr("coordinate");
+    currentPosition = $(this).attr("coordinate");
     console.log("coordinate that I clicked: ", currentPosition);
     var x = parseInt(currentPosition[0]);
     var y = parseInt(currentPosition[1]);
@@ -68,16 +70,18 @@ function possibleMoves(){
             console.log("possibleArray: ", possibleMovesArray);
         }
     }
+    // applyClickToPossible();
 }
 
 //with the possible moves, take one route, update the boardArray, replace current position with 0 
 //update the movement with 1 or 2
 function move(position){
+    //position -> new position that we clicked on...the spot we want to move to
+    position = $(this).attr("coordinate");
     var x = parseInt(position[0]);
     var y = parseInt(position[1]);
-    var currentPosition = $(this).attr("coordinate");
-    var thisX = parseInt(currentPosition[0]);
-    var thisY = parseInt(currentPosition[1]);
+    var thisX = parseInt(clickedPosition[0]);
+    var thisY = parseInt(clickedPosition[1]);
     if (playerTurn === 0) {
         boardArray[x][y] = 1;
         $(".square").attr("coordinate", x + "" + y).addClass(".trianglePiece");
@@ -93,6 +97,7 @@ function move(position){
     }
 }
 
+//go thru possibleMovesArray, apply clickhandlers to those coordinates in array, highlight them on DOM 
 function applyClickToPossible() {
     
 }
@@ -102,14 +107,14 @@ function display(){
 
 }
 
+//jump over enemy piece
 function jump(){
 
 }
 
 
 
-
-//function to dynamically 
+//function to dynamically create board
 function createBoard() {
     gameBoard = $(".gameBoard");
     for (var row = 0; row < boardSize.rows; row++) {
