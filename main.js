@@ -6,9 +6,10 @@ var boardSize = {
     cols: 8
 };
 
+// 0 = player 1 turn, 1 = player 2 turn;
+var playerTurn = 0;
 var playerOneTokens = 12;
 var playerTwoTokens = 12;
-
 
 //0-> empty spaces 1-> playerOne     2-> playerTwo      3-> kingPlayerOne   4-> kingPlayerTwo
 var boardArray = [
@@ -41,8 +42,25 @@ function possibleMoves(){
 
 //with the possible moves, take one route, update the boardArray, replace current position with 0 
 //update the movement with 1 or 2
-function move(){
-   
+function move(position){
+    var x = parseInt(position[0]);
+    var y = parseInt(position[1]);
+    var currentPosition = $(this).attr("coordinate");
+    var thisX = parseInt(currentPosition[0]);
+    var thisY = parseInt(currentPosition[1]);
+    if (playerTurn === 0) {
+        boardArray[x][y] = 1;
+        $(".square").attr("coordinate", x + "" + y).addClass(".trianglePiece");
+        boardArray[thisX][thisY] = 0;
+        $(".trianglePiece").attr("coordinate", x + "" + y).removeClass(".trianglePiece");
+        playerTurn = 1 - playerTurn;
+    } else {
+        boardArray[x][y] = 2;
+        $(".square").attr("coordinate", x + "" + y).addClass(".ciclePiece");
+        boardArray[thisX][thisY] = 0;
+        $(".trianglePiece").attr("coordinate", x + "" + y).removeClass(".circlePiece");
+        playerTurn = 1 - playerTurn;
+    }
 }
 
 //remove the triangle/circle class
