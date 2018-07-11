@@ -6,6 +6,22 @@ var boardSize = {
     cols: 8
 };
 
+var playerOneTokens = 12;
+var playerTwoTokens = 12;
+
+
+//0-> empty spaces 1-> playerOne     2-> playerTwo      3-> kingPlayerOne   4-> kingPlayerTwo
+var boardArray = [
+    [0, 1, 0, 1, 0, 1, 0, 1],
+    [1, 0, 1, 0, 1, 0, 1, 0],
+    [0, 1, 0, 1, 0, 1, 0, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [2, 0, 2, 0, 2, 0, 2, 0],
+    [0, 2, 0, 2, 0, 2, 0, 2],
+    [2, 0, 2, 0, 2, 0, 2, 0],
+];
+
 function initializeApp() {
     // applyClickHandlers();
     // var testPiece = new Piece();
@@ -13,48 +29,33 @@ function initializeApp() {
     applyClickHandlers();
 }
 
-class Piece {
-    //color -> which player, isKing -> is the piece a king piece or not
-    //isAlive -> true if on board, false if not
-    constructor(shape, isKing, isAlive) {
-        if(shape === "triangle"){
-            this.image = "img/triangle.png";
-            this.shape = shape;
-        }
-        if(shape === "cicle"){
-            this.image = "img/circle.png";
-            this.shape = shape;
-        }
-        this.shape = shape;
-        this.isKing = isKing;
-    }
-    //shows possibles choices
-    possibleMoves(){
-        // var xLocation = $(event.target.parentElement).attr('x');
-        // var yLocation =  $(event.target.parentElement).attr('y');
-        // console.log(xLocation, "+" , yLocation);
-        console.log('here');
-    }
-
-    //function to jump onto a diagonal square
-    move() { //physically moves the pieces 
-        if (this.color = "black") {
-
-        }
-    }
-    applyClickHandlers() {
-        $(".square").click(this.possibleMoves);
-    }
-
-    //function to "eat" another piece, call this in the move function
-    jumpOver(){
-
-    }
-}
 
 function applyClickHandlers() {
-    $('.square').click(this.possibleMoves);
+    $('.square').click(possibleMoves);
 }
+
+function possibleMoves(){
+    var x = $(".square").x;
+    var y = $(".square").y;
+}
+
+//with the possible moves, take one route, update the boardArray, replace current position with 0 
+//update the movement with 1 or 2
+function move(){
+   
+}
+
+//remove the triangle/circle class
+function display(){
+
+}
+
+function jump(){
+
+}
+
+
+
 
 //function to dynamically 
 function createBoard() {
@@ -77,18 +78,10 @@ function createBoard() {
             else {
                 squareDiv.addClass("dark");
                 if(row >= 5){
-                    var playerOnePiece = new Piece("triangle");
-                    console.log("playerOne: ", playerOnePiece);
-                    // var pieceDiv = $("<div>", {
-                    //     css: "background-image: url(" + playerOnePiece.image + ")"
-                    // });
-                    var pieceDiv = $("<img>").attr("src", playerOnePiece.image);
-                    squareDiv.append(pieceDiv);
+                    squareDiv.addClass("trianglePiece");      
                 }
                 if(row <= 2){
-                    var playerOnePiece = new Piece("triangle");
                     squareDiv.addClass("circlePiece");
-
                 }
             }
             rowDiv.append(squareDiv);
@@ -96,3 +89,51 @@ function createBoard() {
         gameBoard.append(rowDiv);
     }
 }
+
+
+
+
+
+
+
+
+// class Piece {
+//         //color -> which player, isKing -> is the piece a king piece or not
+//         //isAlive -> true if on board, false if not
+//         constructor(shape, isKing, isAlive) {
+//             if(shape === "triangle"){
+//                 this.image = "img/triangle.png";
+//                 this.shape = shape;
+//             }
+//             if(shape === "circle"){
+//                 this.image = "img/circle.png";
+//                 this.shape = shape;
+//             }
+//             this.shape = shape;
+//             this.isKing = isKing;
+//         }
+    
+//         applyClickHandlers() {
+//             $(".square").click(this.possibleMoves);
+//         }
+    
+//         //shows possibles choices
+//         possibleMoves(){
+//             // var xLocation = $(event.target.parentElement).attr('x');
+//             // var yLocation =  $(event.target.parentElement).attr('y');
+//             // console.log(xLocation, "+" , yLocation);
+//             console.log('here');
+//         }
+    
+//         //function to jump onto a diagonal square
+//         move() { //physically moves the pieces 
+//             if (this.color = "black") {
+    
+//             }
+//         }
+    
+//         //function to "eat" another piece, call this in the move function
+//         jumpOver(){
+    
+//         }
+//     }
