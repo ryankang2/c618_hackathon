@@ -146,8 +146,30 @@ function applyClickToPossible() {
     // splitting x and y
     var firstCoordinate = possibleMovesArray[0];
     var secondCoordinate = possibleMovesArray[1];
-    $("[coordinate=" + firstCoordinate + "]").click(move);
-    $("[coordinate=" + secondCoordinate + "]").click(move);
+    var firstX = firstCoordinate[0];
+    var firstY = firstCoordinate[1];
+    var secondX = secondCoordinate[0];
+    var secondY = secondCoordinate[1];
+    var lastPosition = currentPosition;
+    var lastX = parseInt(lastPosition[0]);
+    var lastY = parseInt(lastPosition[1]);
+    if (secondCoordinate === "undefined") {
+        // if only one possible movement and if jump is possible
+        if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) || (Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2)) {
+            $("[coordinate=" + firstCoordinate + "]").click(jump);
+        } else {
+        // if only one possible movement and jump isn't possible;
+        $("[coordinate=" + firstCoordinate + "]").click(move);
+        }
+    // if two movement possible 
+    } else if (((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) && (Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2)) ||
+                ((Math.abs(lastX - secondX) === 2 && Math.abs(lastY - secondY) === 2) && (Math.abs(lastX - secondX) === 2 && Math.abs(lastY - secondY) === 2))){
+            $("[coordinate=" + firstCoordinate + "]").click(jump);
+            $("[coordinate=" + secondCoordinate + "]").click(jump);
+    } else {
+        $("[coordinate=" + firstCoordinate + "]").click(move);
+        $("[coordinate=" + secondCoordinate + "]").click(move);
+    }
 }
 
 //remove the triangle/circle class
@@ -157,9 +179,8 @@ function display() {
 
 //jump over enemy piece
 function jump() {
-
+    console.log("I jumped");
 }
-
 
 //function to dynamically create board
 function createBoard() {
