@@ -2,12 +2,12 @@ $(document).ready(initializeApp);
 
 var gameBoard = null;       //8x8 gameboard that's dynamically created
 var boardSize = { rows: 8, cols: 8};
-
+var testPiece = new Piece('black', true); 
 
 class Piece{
     //color -> which player, isKing -> is the piece a king piece or not
     //isAlive -> true if on board, false if not
-    constructor(color, isKing, isAlive){
+    constructor(color, isKing){
         this.color = color;
         this.isKing = isKing;
     }
@@ -38,7 +38,7 @@ function initializeApp(){
 }
 
 function applyClickHandlers(){
-  $('.square').click(possibleMoves);
+  $('.square').click(testPiece.possibleMoves());
 
 }
 
