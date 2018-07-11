@@ -36,10 +36,11 @@ function applyClickHandlers(){
 //function to dynamically 
 function createBoard(){
     console.log("here");
+    gameBoard = $(".gameBoard");
     for(var row = 0; row < boardSize.rows; row++){
         var rowDiv = $("<div>", {class: "row"});
         for(var col = 0; col < boardSize.cols; col++){
-            var squareDiv = $("div>", {class: "square"});
+            var squareDiv = $("<div>", {class: "square"});
             if((row+col)%2 === 0){
                 squareDiv.addClass("light");
             }
