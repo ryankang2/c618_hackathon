@@ -35,7 +35,6 @@ function applyClickHandlers(){
 
 //function to dynamically 
 function createBoard(){
-    console.log("here");
     gameBoard = $(".gameBoard");
     for(var row = 0; row < boardSize.rows; row++){
         var rowDiv = $("<div>", {class: "row"});
