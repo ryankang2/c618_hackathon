@@ -245,7 +245,7 @@ function move() {
 //go thru possibleMovesArray, apply clickhandlers to those coordinates in array, highlight them on DOM 
 function applyClickToPossible() {
     // splitting x and y
-    var firstCoordinate = null;
+     var firstCoordinate = null;
     var secondCoordinate = null;
     for(var i = 0; i < possibleMovesArray.length; i++){
         if(i === 0){
@@ -304,7 +304,6 @@ function applyClickToPossible() {
 
 //jump over enemy piece
 function jump() {
-    debugger;
     var position = $(this).attr("coordinate");
 
 
