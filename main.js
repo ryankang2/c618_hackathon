@@ -343,6 +343,7 @@ function jump() {
         $(".circlePiece").click(possibleMoves);
     }
     turnHighlight();
+    deathCounter();
     $(".gameBoard div").removeClass("highlight");
     // change flag for checkPawnOrKing function
     jumpPosition = null;
@@ -419,6 +420,7 @@ function turnHighlight() {
 function reset() {
     console.log("button pressed");
     $(".gameBoard").empty();
+    $(".reset").off();
     playerOneTokens = 12;
     playerTwoTokens = 12;
     possibleMovesArray = [];
