@@ -9,7 +9,7 @@ body {
 }
 
 .header {
-    height: 13%;
+    height: 10%;
     display: flex;
     justify-content: center;
 }
@@ -17,20 +17,38 @@ body {
 .header img {
     position: absolute;
     height: 20%;
-    top: -3.5%;
+    top: -5.0%;
 }
 
 .middleSection {
     display: flex;
     justify-content: center;
-    height: 85%;
+    height: 88%;
 }
 
 .player {
-    width: 10%;
+    width: 9.5%;
     height: 95%;
     display: inline-block;
     border: 1px solid white;
+    position: relative;
+}
+
+.avatar {
+    box-sizing: border-box;
+    position: relative;
+}
+
+.tokensTaken {
+    height: 75%;
+}
+
+.right .avatar {
+    position: absolute;
+    bottom: 0;
+}
+
+.avatar img {
 }
 
 .gameBoard {
@@ -92,4 +110,20 @@ img {
 .highlight {
     box-sizing: border-box;
     border: 5px solid white;
+}
+
+.resetContainer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.reset {
+    /* display: flex;
+    justify-content: center; */
+    position: absolute;
+    bottom: 0;
+    right: 0%;
+    width: 15%;
+    align-items: center;
 }
