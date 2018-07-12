@@ -327,11 +327,28 @@ function jump() {
         }
     }
     if (playerTurn === 1) {
-        if (thisY > lastY) {
-            jumpPosition = Math.abs(thisX - 1) + "" + Math.abs(thisY - 1);
-        } else {
-            jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY + 1);
+        //for kings
+        if(boardArray[lastX][lastY] === 4){
+            if (thisY > lastY) {
+                jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY - 1);
+            } else {
+                jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY + 1);
+            }
         }
+        //for pawns
+        else{
+            if (thisY > lastY) {
+                jumpPosition = Math.abs(thisX - 1) + "" + Math.abs(thisY - 1);
+            } else {
+                jumpPosition = Math.abs(thisX - 1) + "" + Math.abs(thisY + 1);
+            }
+        }
+
+        // if (thisY > lastY) {
+        //     jumpPosition = Math.abs(thisX - 1) + "" + Math.abs(thisY - 1);
+        // } else {
+        //     jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY + 1);
+        // }
     }
 
     checkPawnOrKing(position, jumpPosition);
