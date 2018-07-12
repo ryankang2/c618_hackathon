@@ -330,7 +330,7 @@ function jump() {
         if (thisY > lastY) {
             jumpPosition = Math.abs(thisX - 1) + "" + Math.abs(thisY - 1);
         } else {
-            jumpPosition = Math.abs(thisX - 1) + "" + Math.abs(thisY + 1);
+            jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY + 1);
         }
     }
 
