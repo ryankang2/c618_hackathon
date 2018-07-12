@@ -60,7 +60,7 @@ img {
 }
 
 .trianglePiece{
-    background-image: url("img/triangle.png");
+    background-image: url("img/capacitor.png");
     background-repeat: no-repeat;
     background-size: cover; 
 }
@@ -69,4 +69,9 @@ img {
     background-image: url("img/circle.png");
     background-repeat: no-repeat;
     background-size: cover; 
+}
+
+.highlight {
+    box-sizing: border-box;
+    border: 5px solid white;
 }
