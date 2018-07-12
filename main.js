@@ -78,14 +78,35 @@ function possibleMoves(x,y) {
             var firstCoordinate = "" + (x-1) + (y+1);
             possibleMovesArray.push(firstCoordinate);
         }
-        //if left and right not empty, check if we can jump over
-        // if(boardArray[x-1][y-1] !== 0 && boardArray[x-1][y+1] !== 0 &&
-        //     $("[coordinate=" + (x-1)+(y-1) + "]").find(".triangle") == false &&
-        //     $("[coordinate=" + (x-1)+(y+1) + "]").find(".triangle") == false){
-
-        // }
         console.log("possible Array: ", possibleMovesArray);
+        //if both left/right are enemy checkers
+        if (boardArray[x - 1][y + 1] === 2 && boardArray[x - 1][y - 1] === 2) {
+            //check if can jump over right enemy checker
+            if (boardArray[x - 2][y + 2] === 0) {
+                var jumpCoordinate = "" + (x - 2) + (y + 2);
+                possibleMovesArray.push(jumpCoordinate);
+            }
+            //check if can jump over left enemey checker
+            if (boardArray[x - 2][y - 2] === 0){
+                var jumpCoordinate = "" + (x - 2) + (y - 2);
+                possibleMovesArray.push(jumpCoordinate);
+            }
+        }
+        //if both left/right are checkers 
+        if(boardArray[x-1][y+1] != 0 && boardArray[x-1][y-1] != 0){
+            //if right checker is a enemy and have ability to jump over
+            if(boardArray[x-1][y+1] === 2 && boardArray[x-2][y+2] === 0){
+                var jumpCoordinate = "" + (x-2) + (y+2);
+                possibleMovesArray.push(jumpCoordinate);
+            }
+            //if left checker is an enemy and have ability to jump over
+            if(boardArray[x-1][y-1] === 2 && boardArray[x-2][y-2] === 0){
+                var jumpCoordinate = "" + (x-2) + (y-2);
+                possibleMovesArray.push(jumpCoordinate);
+            }
+        }
     }
+
     //playerTwoMovement, goes down board
     if(boardArray[x][y] === 2){
         //if both spaces are empty
@@ -101,13 +122,12 @@ function possibleMoves(x,y) {
                 var jumpCoordinate = "" + (x+2) + (y+2);
                 possibleMovesArray.push(jumpCoordinate);
                 jumpPosition = "" + (x+1) + (y+1);
-              
             }
             var firstCoordinate = "" + (x+1) + (y-1);
             possibleMovesArray.push(firstCoordinate);
         }
         //right space is empty, left space is not empty/defined
-        if(boardArray[x+1][y+1] === 0 && (boardArray[x+1][y-1] !== 0 && typeof boardArray[x+1][y-1] != undefined)){}
+        if(boardArray[x+1][y+1] === 0 && (boardArray[x+1][y-1] !== 0 && typeof boardArray[x+1][y-1] != undefined)){
             //can jump over left enemy checker
             if(boardArray[x+2][y-2] === 0){
                 var jumpCoordinate = "" + (x+2) + (y-2);
@@ -119,16 +139,38 @@ function possibleMoves(x,y) {
             possibleMovesArray.push(firstCoordinate);
             console.log("possible Array: ", possibleMovesArray);
         }
-
-    //playerOne's movements, go up the board
-    // if (boardArray[x][y] === 1) {
-    //     playerOneMovement(x,y);
-    // }
-    // //playerTwo's movements, go down the board
-    // if (boardArray[x][y] === 2) {
-    //     playerTwoMovement(x,y);
-    // }
+        //if both left/right are enemy checkers
+        if(boardArray[x+1][y+1] === 1 && boardArray[x+1][y-1] === 1){
+            //check if can jump over right checker
+            if(boardArray[x+2][y+2] === 0){
+                var jumpCoordinate = "" + (x+2) + (y+2);
+                possibleMovesArray.push(jumpCoordinate);
+            }
+            //check if can jump over left checker
+            if(boardArray[x+2][y-2] === 0){
+                var jumpCoordinate = "" + (x+2) + (y-2);
+                possibleMovesArray.push(jumpCoordinate);
+            }
+        }
+        //if both left/right are checkers
+        if(boardArray[x+1][y+1] !== 0 && boardArray[x+1][y-1] !== 0 && possibleMovesArray.length < 2){
+            //if right checker is an enemy and have ability to jump over
+            if(boardArray[x+1][y+1] === 1 && boardArray[x+2][y+2] === 0){
+                var jumpCoordinate = "" + (x+2) + (y+2);
+                possibleMovesArray.push(jumpCoordinate);
+            }
+            //if left checker is an enemy and have ability to jump over
+            if(boardArray[x+1][y-1] === 1 && boardArray[x+2][y-2] === 0){
+                var jumpCoordinate = "" + (x+2) + (y-2);
+                possibleMovesArray.push(jumpCoordinate);
+            }
+            if(possibleMovesArray[0] == possibleMovesArray[1]){
+                possibleMovesArray.pop();
+            }
+        }
+    }
     applyClickToPossible();
+    console.log("possible Array: ", possibleMovesArray);
 }
 
 //subfunction to monitor player one movement
@@ -271,6 +313,7 @@ function jump() {
     var jump  = jumpPosition;
     var jumpX = parseInt(jumpPosition[0]);
     var jumpY = parseInt(jumpPosition[1]);
+    debugger;
     //if player 2 turn, move the circle pieces, and kill the item in the middle
     if (playerTurn === 1) {
         boardArray[lastX][lastY] = 0;
@@ -285,14 +328,20 @@ function jump() {
     }
     //player one turn, move triangle pieces
     else {
+        
         boardArray[lastX][lastY] = 0;
         boardArray[jumpX][jumpY] = 0;
         boardArray[thisX][thisY] = 1;
         $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
         $("[coordinate=" + jumpPosition + "]").removeClass("circlePiece");
         $("[coordinate=" + position + "]").addClass("trianglePiece");
-        jump(jumpPosition);
         playerTurn = 1 - playerTurn;
+    }
+    $("div").off();
+    if (playerTurn === 0) {
+        $(".trianglePiece").click(possibleMoves);
+    } else {
+        $(".circlePiece").click(possibleMoves);
     }
 }
 
