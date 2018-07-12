@@ -309,6 +309,7 @@ function jump() {
     var lastY = parseInt(lastPosition[1]);
     debugger;
     //making jumpPosition based on choice
+    // need to add king opposite
     if (playerTurn === 0) {
         if(boardArray[lastX][lastY] === 3){
             if (thisY > lastY) {
@@ -487,9 +488,9 @@ function checkPawnOrKing(position, jumpPosition) {
             //king move - player 1
             else {
                     boardArray[lastX][lastY] = 0;
-                    boardArray[thisX][thisY] = 1;
-                    $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
-                    $("[coordinate=" + position + "]").addClass("trianglePiece");
+                    boardArray[thisX][thisY] = 3;
+                    $("[coordinate=" + lastPosition + "]").removeClass("king trianglePiece");
+                    $("[coordinate=" + position + "]").addClass("king trianglePiece");
             }
         }
     } else {
