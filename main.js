@@ -207,6 +207,7 @@ function move() {
 
 //go thru possibleMovesArray, apply clickhandlers to those coordinates in array, highlight them on DOM 
 function applyClickToPossible() {
+    debugger;
     // splitting x and y
     var firstCoordinate = possibleMovesArray[0];
     var secondCoordinate = possibleMovesArray[1];
@@ -226,11 +227,20 @@ function applyClickToPossible() {
         $("[coordinate=" + firstCoordinate + "]").click(move);
         }
     // if two movement possible 
-    } else if (((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) && (Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2)) ||
-                ((Math.abs(lastX - secondX) === 2 && Math.abs(lastY - secondY) === 2) && (Math.abs(lastX - secondX) === 2 && Math.abs(lastY - secondY) === 2))){
-            $("[coordinate=" + firstCoordinate + "]").click(jump);
-            $("[coordinate=" + secondCoordinate + "]").click(jump);
-    } else {
+    } else if   ((Math.abs(lastX - firstX) === 2 && Math.abs(lastX - firstY) === 2) &&
+                ((Math.abs(lastX - secondX) === 2 && Math.abs(lastX - secondY) === 2))){
+        $("[coordinate=" + firstCoordinate + "]").click(jump);
+        $("[coordinate=" + secondCoordinate + "]").click(jump);
+    } else if   ((Math.abs(lastX - firstX) === 2 && Math.abs(lastX - firstY) === 2) &&
+                ((Math.abs(lastX - secondX) !== 2 && Math.abs(lastX - secondY) !== 2))){
+        $("[coordinate=" + firstCoordinate + "]").click(jump);
+        $("[coordinate=" + secondCoordinate + "]").click(move);
+    } else if   ((Math.abs(lastX - firstX) !== 2 && Math.abs(lastX - firstY) !== 2) &&
+                ((Math.abs(lastX - secondX) === 2 && Math.abs(lastX - secondY) === 2))){
+        $("[coordinate=" + firstCoordinate + "]").click(move);
+        $("[coordinate=" + secondCoordinate + "]").click(jump);
+    }
+    else {
         $("[coordinate=" + firstCoordinate + "]").click(move);
         $("[coordinate=" + secondCoordinate + "]").click(move);
     }
