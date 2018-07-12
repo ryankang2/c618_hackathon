@@ -213,12 +213,14 @@ function applyClickToPossible() {
     var secondCoordinate = possibleMovesArray[1];
     var firstX = firstCoordinate[0];
     var firstY = firstCoordinate[1];
-    var secondX = secondCoordinate[0];
-    var secondY = secondCoordinate[1];
+    if (secondCoordinate !== undefined) {
+        var secondX = secondCoordinate[0];
+        var secondY = secondCoordinate[1];
+    }
     var lastPosition = currentPosition;
     var lastX = parseInt(lastPosition[0]);
     var lastY = parseInt(lastPosition[1]);
-    if (secondCoordinate === "undefined") {
+    if (secondCoordinate === undefined) {
         // if only one possible movement and if jump is possible
         if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) || (Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2)) {
             $("[coordinate=" + firstCoordinate + "]").click(jump);
@@ -227,16 +229,16 @@ function applyClickToPossible() {
         $("[coordinate=" + firstCoordinate + "]").click(move);
         }
     // if two movement possible 
-    } else if   ((Math.abs(lastX - firstX) === 2 && Math.abs(lastX - firstY) === 2) &&
-                ((Math.abs(lastX - secondX) === 2 && Math.abs(lastX - secondY) === 2))){
+    } else if   ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) &&
+                ((Math.abs(lastX - secondX) === 2 && Math.abs(lastY - secondY) === 2))){
         $("[coordinate=" + firstCoordinate + "]").click(jump);
         $("[coordinate=" + secondCoordinate + "]").click(jump);
-    } else if   ((Math.abs(lastX - firstX) === 2 && Math.abs(lastX - firstY) === 2) &&
-                ((Math.abs(lastX - secondX) !== 2 && Math.abs(lastX - secondY) !== 2))){
+    } else if   ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) &&
+                ((Math.abs(lastX - secondX) !== 2 && Math.abs(lastY - secondY) !== 2))){
         $("[coordinate=" + firstCoordinate + "]").click(jump);
         $("[coordinate=" + secondCoordinate + "]").click(move);
-    } else if   ((Math.abs(lastX - firstX) !== 2 && Math.abs(lastX - firstY) !== 2) &&
-                ((Math.abs(lastX - secondX) === 2 && Math.abs(lastX - secondY) === 2))){
+    } else if   ((Math.abs(lastX - firstX) !== 2 && Math.abs(lastY - firstY) !== 2) &&
+                ((Math.abs(lastX - secondX) === 2 && Math.abs(lastY - secondY) === 2))){
         $("[coordinate=" + firstCoordinate + "]").click(move);
         $("[coordinate=" + secondCoordinate + "]").click(jump);
     }
