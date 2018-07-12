@@ -7,7 +7,7 @@ var boardSize = {
 };
 var possibleMovesArray = [];
 var currentPosition = null;
-
+var jumpPosition = null;
 // 0 = player 1 turn, 1 = player 2 turn;
 var playerTurn = 0;
 var playerOneTokens = 12;
@@ -43,6 +43,7 @@ function applyClickHandlers() {
 function possibleMoves(x,y) {
     possibleMovesArray = []; //reset global array
     currentPosition = $(this).attr("coordinate");
+    
     console.log("coordinate that I clicked: ", currentPosition);
     var x = parseInt(currentPosition[0]);
     var y = parseInt(currentPosition[1]);
@@ -60,6 +61,8 @@ function possibleMoves(x,y) {
             if(boardArray[x-2][y+2] === 0){
                 var jumpCoordinate = "" + (x-2) + (y+2);
                 possibleMovesArray.push(jumpCoordinate);
+                jumpPosition = "" + (x-1) + (y+1);
+              
             }
             var firstCoordinate = "" + (x-1) + (y-1);
             possibleMovesArray.push(firstCoordinate);
@@ -70,6 +73,8 @@ function possibleMoves(x,y) {
             if(boardArray[x-2][y-2] === 0){
                 var jumpCoordinate = "" + (x-2) + (y-2);
                 possibleMovesArray.push(jumpCoordinate);
+                jumpPosition = "" + (x-1) + (y-1);
+                
             }
             var firstCoordinate = "" + (x-1) + (y+1);
             possibleMovesArray.push(firstCoordinate);
@@ -96,6 +101,8 @@ function possibleMoves(x,y) {
             if(boardArray[x+2][y+2] === 0){
                 var jumpCoordinate = "" + (x+2) + (y+2);
                 possibleMovesArray.push(jumpCoordinate);
+                jumpPosition = "" + (x+1) + (y+1);
+              
             }
             var firstCoordinate = "" + (x+1) + (y-1);
             possibleMovesArray.push(firstCoordinate);
@@ -106,6 +113,8 @@ function possibleMoves(x,y) {
             if(boardArray[x+2][y-2] === 0){
                 var jumpCoordinate = "" + (x+2) + (y-2);
                 possibleMovesArray.push(jumpCoordinate);
+                jumpPosition = "" + (x+1) + (y-1);
+            
             }
             var firstCoordinate = "" + (x+1) + (y+1);
             possibleMovesArray.push(firstCoordinate);
@@ -126,7 +135,8 @@ function possibleMoves(x,y) {
 //subfunction to monitor player one movement
 function playerOneMovement(x,y) {
     //check if both spots are empty
-    if (boardArray[x - 1][y + 1] === 0 && boardArray[x - 1][y - 1] === 0) {
+    debugger;
+    if (boardArray[x - 1][y - 1] === 0 && boardArray[x - 1][y + 1] === 0) {
         var firstCoordinate = "" + (x - 1) + (y - 1);
         var secondCoordinate = "" + (x - 1) + (y + 1);
         possibleMovesArray.push(firstCoordinate, secondCoordinate);
@@ -139,7 +149,7 @@ function playerOneMovement(x,y) {
         console.log("possibleMovesArray: ", possibleMovesArray);
     }
     //if piece cant make a right movement can make left
-    if (boardArray[x - 1][y + 1] !== 0 && boardArray[x - 1][y - 1] === 0) {
+    if (boardArray[x - 1][y - 1] === 0 && boardArray[x - 1][y + 1] !== 0) {
         var firstCoordinate = "" + (x - 1) + (y - 1);
         possibleMovesArray.push(firstCoordinate);
         console.log("possibleMovesArray: ", possibleMovesArray);
@@ -149,7 +159,7 @@ function playerOneMovement(x,y) {
 //subfunction to monitory player two movement
 function playerTwoMovement(x,y) {
     //check if both spots are empty
-    if (boardArray[x + 1][y - 1] === 0 && boardArray[x + 1][y + 1] === 0) {
+    if (boardArray[x + 1][y + 1] === 0 && boardArray[x + 1][y - 1] === 0) {
         var firstCoordinate = "" + (x + 1) + (y + 1);
         var secondCoordinate = "" + (x + 1) + (y - 1);
         possibleMovesArray.push(firstCoordinate, secondCoordinate);
@@ -254,10 +264,49 @@ function display() {
 }
 
 //jump over enemy piece
+<<<<<<< HEAD
 function jump() {
     console.log("I jumped");
 }
 
+=======
+function jump(jumpPosition) {
+    debugger;
+    var position = $(this).attr("coordinate");
+    var thisX = parseInt(position[0]);
+    var thisY = parseInt(position[1]);
+    var lastPosition = currentPosition;
+    var lastX = parseInt(lastPosition[0]);
+    var lastY = parseInt(lastPosition[1]);
+    var jump  = jumpPosition;
+    var jumpX = parseInt(jumpPosition[0]);
+    var jumpY = parseInt(jumpPosition[1]);
+    //if player 2 turn, move the circle pieces, and kill the item in the middle
+    if (playerTurn === 1) {
+        boardArray[lastX][lastY] = 0;
+        boardArray[jumpX][jumpY] = 0;
+        boardArray[thisX][thisY] = 2;
+
+        $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
+        $("[coordinate=" + jumpPosition + "]").removeClass("trianglePiece");
+        $("[coordinate=" + position + "]").addClass("circlePiece");
+
+        playerTurn = 1 - playerTurn;
+    }
+    //player one turn, move triangle pieces
+    else {
+        boardArray[lastX][lastY] = 0;
+        boardArray[jumpX][jumpY] = 0;
+        boardArray[thisX][thisY] = 1;
+        $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
+        $("[coordinate=" + jumpPosition + "]").removeClass("circlePiece");
+        $("[coordinate=" + position + "]").addClass("trianglePiece");
+        jump(jumpPosition);
+        playerTurn = 1 - playerTurn;
+    }
+}
+
+>>>>>>> c23231789585a6c60e360b193f8f8b25efc4e27a
 //function to dynamically create board
 function createBoard() {
     gameBoard = $(".gameBoard");
