@@ -245,6 +245,7 @@ function move() {
         boardArray[thisX][thisY] = 2;
         $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
         $("[coordinate=" + position + "]").addClass("circlePiece");
+        debugger;
         playerTurn = 1 - playerTurn;
     }
     //player one turn, move triangle pieces
@@ -253,7 +254,9 @@ function move() {
         boardArray[thisX][thisY] = 1;
         $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
         $("[coordinate=" + position + "]").addClass("trianglePiece");
+        debugger;
         playerTurn = 1 - playerTurn;
+        
     }
     //turn off all divs, but apply click handler to next player's pieces
     $("div").off();
@@ -355,7 +358,6 @@ function jump() {
     
     var jumpX = parseInt(jumpPosition[0]);
     var jumpY = parseInt(jumpPosition[1]);
-    debugger;
     //if player 2 turn, move the circle pieces, and kill the item in the middle
     if (playerTurn === 1) {
         boardArray[lastX][lastY] = 0;
@@ -365,7 +367,7 @@ function jump() {
         $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
         $("[coordinate=" + jumpPosition + "]").removeClass("trianglePiece");
         $("[coordinate=" + position + "]").addClass("circlePiece");
-
+        debugger;
         playerTurn = 1 - playerTurn;
     }
     //player one turn, move triangle pieces
@@ -377,6 +379,7 @@ function jump() {
         $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
         $("[coordinate=" + jumpPosition + "]").removeClass("circlePiece");
         $("[coordinate=" + position + "]").addClass("trianglePiece");
+        debugger;
         playerTurn = 1 - playerTurn;
     }
     $("div").off();
@@ -385,6 +388,20 @@ function jump() {
     } else {
         $(".circlePiece").click(possibleMoves);
     }
+}
+
+function toKing () {
+    var King= $(this);
+    if (player === 0) {
+       var King= $(this);
+       King.addClass('king')
+    }
+    else {
+        var King= $(this);
+        King.addClass('king')
+        
+     }
+        
 }
 
 //function to dynamically create board
