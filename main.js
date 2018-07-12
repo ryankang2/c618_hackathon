@@ -478,7 +478,7 @@ function checkPawnOrKing(position, jumpPosition) {
             }
         // not jumpable king  
         } else {
-            // king move - player 2
+            // king move - player 2git
             if (playerTurn === 1) {
                     boardArray[lastX][lastY] = 0;
                     boardArray[thisX][thisY] = 4;
@@ -533,16 +533,16 @@ function checkPawnOrKing(position, jumpPosition) {
                     boardArray[lastX][lastY] = 0;
                     boardArray[jumpX][jumpY] = 0;
                     boardArray[thisX][thisY] = 4;
-                    $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
-                    $("[coordinate=" + jumpPosition + "]").removeClass("trianglePiece");
+                    $("[coordinate=" + lastPosition + "]").removeClass("king circlePiece");
+                    $("[coordinate=" + jumpPosition + "]").removeClass("king trianglePiece");
                     $("[coordinate=" + position + "]").addClass("king circlePiece");
 
                 } else {
                     boardArray[lastX][lastY] = 0;
                     boardArray[jumpX][jumpY] = 0;
                     boardArray[thisX][thisY] = 2;
-                    $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
-                    $("[coordinate=" + jumpPosition + "]").removeClass("trianglePiece");
+                    $("[coordinate=" + lastPosition + "]").removeClass("king circlePiece");
+                    $("[coordinate=" + jumpPosition + "]").removeClass("king trianglePiece");
                     $("[coordinate=" + position + "]").addClass("circlePiece");
                 }
                 playerOneTokens--;
@@ -554,16 +554,16 @@ function checkPawnOrKing(position, jumpPosition) {
                     boardArray[lastX][lastY] = 0;
                     boardArray[jumpX][jumpY] = 0;
                     boardArray[thisX][thisY] = 3;
-                    $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
-                    $("[coordinate=" + jumpPosition + "]").removeClass("circlePiece");
+                    $("[coordinate=" + lastPosition + "]").removeClass("king trianglePiece");
+                    $("[coordinate=" + jumpPosition + "]").removeClass("king circlePiece");
                     $("[coordinate=" + position + "]").addClass("king trianglePiece");
 
                 } else {
                     boardArray[lastX][lastY] = 0;
                     boardArray[jumpX][jumpY] = 0;
                     boardArray[thisX][thisY] = 1;
-                    $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
-                    $("[coordinate=" + jumpPosition + "]").removeClass("circlePiece");
+                    $("[coordinate=" + lastPosition + "]").removeClass("king trianglePiece");
+                    $("[coordinate=" + jumpPosition + "]").removeClass("king circlePiece");
                     $("[coordinate=" + position + "]").addClass("trianglePiece");
                 }
                 playerTwoTokens--;
@@ -580,7 +580,7 @@ function checkPawnOrKing(position, jumpPosition) {
                 } else {
                     boardArray[lastX][lastY] = 0;
                     boardArray[thisX][thisY] = 2;
-                    $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
+                    $("[coordinate=" + lastPosition + "]").removeClass("king circlePiece");
                     $("[coordinate=" + position + "]").addClass("circlePiece");
                 }
             }
@@ -591,11 +591,11 @@ function checkPawnOrKing(position, jumpPosition) {
                     boardArray[lastX][lastY] = 0;
                     boardArray[thisX][thisY] = 3;
                     $("[coordinate=" + position + "]").addClass("king trianglePiece");
-                    $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
+                    $("[coordinate=" + lastPosition + "]").removeClass("king trianglePiece");
                 } else {
                     boardArray[lastX][lastY] = 0;
                     boardArray[thisX][thisY] = 1;
-                    $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
+                    $("[coordinate=" + lastPosition + "]").removeClass("king trianglePiece");
                     $("[coordinate=" + position + "]").addClass("trianglePiece");
                 }
             }
