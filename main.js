@@ -153,7 +153,7 @@ function possibleMoves(x,y) {
             }
         }
         //if both left/right are checkers
-        if(boardArray[x+1][y+1] !== 0 && boardArray[x+1][y-1] !== 0){
+        if(boardArray[x+1][y+1] !== 0 && boardArray[x+1][y-1] !== 0 && possibleMovesArray.length < 2){
             //if right checker is an enemy and have ability to jump over
             if(boardArray[x+1][y+1] === 1 && boardArray[x+2][y+2] === 0){
                 var jumpCoordinate = "" + (x+2) + (y+2);
@@ -161,8 +161,11 @@ function possibleMoves(x,y) {
             }
             //if left checker is an enemy and have ability to jump over
             if(boardArray[x+1][y-1] === 1 && boardArray[x+2][y-2] === 0){
-                var jumpCoordinate = "" + (x+2) + (y-22);
+                var jumpCoordinate = "" + (x+2) + (y-2);
                 possibleMovesArray.push(jumpCoordinate);
+            }
+            if(possibleMovesArray[0] == possibleMovesArray[1]){
+                possibleMovesArray.pop();
             }
         }
     }
@@ -254,7 +257,7 @@ function move() {
 
 //go thru possibleMovesArray, apply clickhandlers to those coordinates in array, highlight them on DOM 
 function applyClickToPossible() {
-    debugger;
+    // debugger;
     // splitting x and y
     var firstCoordinate = possibleMovesArray[0];
     var secondCoordinate = possibleMovesArray[1];
