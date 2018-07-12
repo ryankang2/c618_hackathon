@@ -200,7 +200,6 @@ function possibleMoves(x, y) {
 function move() {
     //position -> new position that we clicked on...the spot we want to move to
     var position = $(this).attr("coordinate"); 
-    toKing(position);
     var thisX = parseInt(position[0]);
     var thisY = parseInt(position[1]);
     var lastPosition = currentPosition;
@@ -216,7 +215,6 @@ function move() {
         boardArray[thisX][thisY] = 4;
         $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
         $("[coordinate=" + position + "]").addClass("circlePiece");
-        debugger;
         playerTurn = 1 - playerTurn;
     }
     //player one turn, move triangle pieces
@@ -229,7 +227,6 @@ function move() {
         boardArray[thisX][thisY] = 3;
         $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
         $("[coordinate=" + position + "]").addClass("trianglePiece");
-        debugger;
         playerTurn = 1 - playerTurn;
         
     }
@@ -247,7 +244,8 @@ function move() {
 //go thru possibleMovesArray, apply clickhandlers to those coordinates in array, highlight them on DOM 
 function applyClickToPossible() {
     // turn off click and enable again to prevent changing coin choice
-    $("div").off().removeClass("highlight");
+
+    // $("div").off().removeClass("highlight");
     if (playerTurn === 0) {
         $(".trianglePiece").click(possibleMoves);
     } else {
@@ -352,7 +350,6 @@ function jump() {
         $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
         $("[coordinate=" + jumpPosition + "]").removeClass("trianglePiece");
         $("[coordinate=" + position + "]").addClass("circlePiece");
-        debugger;
         playerTurn = 1 - playerTurn;
     }
     //player one turn, move triangle pieces
@@ -364,7 +361,6 @@ function jump() {
         $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
         $("[coordinate=" + jumpPosition + "]").removeClass("circlePiece");
         $("[coordinate=" + position + "]").addClass("trianglePiece");
-        debugger;
         playerTurn = 1 - playerTurn;
     }
     $("div").off();
@@ -377,19 +373,6 @@ function jump() {
     $(".gameBoard div").removeClass("highlight");
 }
 
-// function toKing (position) {
-//     var King= $(this);
-//     if (playerTurn === 0) {
-//      if (position[0] === "0")
-//        King.addClass('king')
-//     }
-//     else {
-//         if (playerTurn === 1) {
-//             if (position[0] === "7")
-//               King.addClass('king')
-//      }
-        
-// }
 
 //function to dynamically create board
 function createBoard() {
