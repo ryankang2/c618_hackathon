@@ -316,8 +316,9 @@ function jump() {
     }
 
     checkPawnOrKing(position, jumpPosition);
-
     $("div").off();
+    playerTurn = 1 - playerTurn;
+    
     if (playerTurn === 0) {
         $(".trianglePiece").click(possibleMoves);
     } else {
@@ -325,8 +326,6 @@ function jump() {
     }
     turnHighlight();
     $(".gameBoard div").removeClass("highlight");
-    
-    playerTurn = 1 - playerTurn;
     // change flag for checkPawnOrKing function
     jumpPosition = null;
 }
