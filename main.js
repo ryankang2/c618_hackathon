@@ -209,22 +209,23 @@ function move() {
     //if player 2 turn, move the circle pieces
     if (playerTurn === 1) {
         if(thisX === 7){
-            console.log("KING");
+            console.log("KING CIRCLE");
         }
+        //king for player 2 -> 4
         boardArray[lastX][lastY] = 0;
-        boardArray[thisX][thisY] = 2;
+        boardArray[thisX][thisY] = 4;
         $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
         $("[coordinate=" + position + "]").addClass("circlePiece");
         playerTurn = 1 - playerTurn;
-  
     }
     //player one turn, move triangle pieces
     else {
         if(thisX === 0){
-            console.log("KING");
+            console.log("KING TRIANGLE");
         }
+        //king for player1 -> 3
         boardArray[lastX][lastY] = 0;
-        boardArray[thisX][thisY] = 1;
+        boardArray[thisX][thisY] = 3;
         $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
         $("[coordinate=" + position + "]").addClass("trianglePiece");
         playerTurn = 1 - playerTurn;
