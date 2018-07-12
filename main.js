@@ -32,6 +32,7 @@ function initializeApp() {
     createBoard();
     applyClickHandlers();
     turnHighlight();
+    deathCounter();
 }
 
 
@@ -397,6 +398,13 @@ function checkWin(){
         return true;
     }
     return false;
+}
+function deathCounter() {
+    debugger;
+    var p1deathcounter = $(".counterLeft");
+    var p2deathcounter = $(".counterRight");
+    p1deathcounter.append(playerOneTokens);
+    p2deathcounter.append(playerTwoTokens);
 }
 
 // turns on the highlights for selected 

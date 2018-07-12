@@ -1,3 +1,8 @@
+@font-face {
+    font-family: neon;
+    src: url("font/AUTOMANI.TTF");
+
+}
 body {
     width: 100vw;
     height: 100vh;
@@ -38,9 +43,23 @@ body {
     box-sizing: border-box;
     position: relative;
 }
+.counterLeft {
+    color: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    font-size: 3vh;
+    font-size: center;
+    font-family: neon;
+    color: #09CEEC;
+
+}
 
 .tokensTaken {
     height: 75%;
+
+    
 }
 
 .right .avatar {
