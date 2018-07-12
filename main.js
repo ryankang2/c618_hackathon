@@ -8,6 +8,7 @@ var boardSize = {
 var possibleMovesArray = [];
 var currentPosition = null;
 var jumpPosition = null;        //position of token thats being kileld
+
 // 0 = player 1 turn, 1 = player 2 turn;
 var playerTurn = 0;
 var playerOneTokens = 12;
@@ -48,6 +49,11 @@ function possibleMoves(x, y) {
     var y = parseInt(currentPosition[1]);
     //playerOneMovement, goes up board
     if (boardArray[x][y] === 1) {
+        //if both left and right are on same team, just return out
+        if(boardArray[x-1][y-1] === 1 && boardArray[x-1][y+1] === 1){
+            console.log("same");
+            return;
+        }
         //if both spaces are empty
         if (boardArray[x - 1][y - 1] === 0 && boardArray[x - 1][y + 1] === 0) {
             var firstCoordinate = "" + (x - 1) + (y - 1);
@@ -78,37 +84,48 @@ function possibleMoves(x, y) {
             var firstCoordinate = "" + (x - 1) + (y + 1);
             possibleMovesArray.push(firstCoordinate);
         }
-        console.log("possible Array: ", possibleMovesArray);
         //if both left/right are enemy checkers
         if (boardArray[x - 1][y + 1] === 2 && boardArray[x - 1][y - 1] === 2) {
             //check if can jump over right enemy checker
             if (boardArray[x - 2][y + 2] === 0) {
                 var jumpCoordinate = "" + (x - 2) + (y + 2);
                 possibleMovesArray.push(jumpCoordinate);
+                // jumpPosition = "" + (x - 1) + (y + 1);
             }
             //check if can jump over left enemey checker
             if (boardArray[x - 2][y - 2] === 0) {
                 var jumpCoordinate = "" + (x - 2) + (y - 2);
                 possibleMovesArray.push(jumpCoordinate);
+                // jumpPosition = "" + (x - 1) + (y - 1);
             }
         }
         //if both left/right are checkers 
-        if (boardArray[x - 1][y + 1] != 0 && boardArray[x - 1][y - 1] != 0) {
+
+        if (boardArray[x - 1][y + 1] != 0 && boardArray[x - 1][y - 1] != 0 && possibleMovesArray.length < 2) {
             //if right checker is a enemy and have ability to jump over
             if (boardArray[x - 1][y + 1] === 2 && boardArray[x - 2][y + 2] === 0) {
                 var jumpCoordinate = "" + (x - 2) + (y + 2);
                 possibleMovesArray.push(jumpCoordinate);
+                // jumpPosition = "" + (x - 1) + (y + 1);
             }
             //if left checker is an enemy and have ability to jump over
             if (boardArray[x - 1][y - 1] === 2 && boardArray[x - 2][y - 2] === 0) {
                 var jumpCoordinate = "" + (x - 2) + (y - 2);
                 possibleMovesArray.push(jumpCoordinate);
+                // jumpPosition = "" + (x - 1) + (y - 1);
+            }
+            if (possibleMovesArray[0] == possibleMovesArray[1]) {
+                possibleMovesArray.pop();
             }
         }
     }
-
     //playerTwoMovement, goes down board
     if (boardArray[x][y] === 2) {
+        //check if left/right are same team
+        if(boardArray[x+1][y+1] === 2 && boardArray[x+1][y-1] === 2){
+            console.log("Here player2");
+            return;
+        }
         //if both spaces are empty
         if (boardArray[x + 1][y + 1] === 0 && boardArray[x + 1][y - 1] === 0) {
             var firstCoordinate = "" + (x + 1) + (y + 1);
@@ -137,7 +154,6 @@ function possibleMoves(x, y) {
             }
             var firstCoordinate = "" + (x + 1) + (y + 1);
             possibleMovesArray.push(firstCoordinate);
-            console.log("possible Array: ", possibleMovesArray);
         }
         //if both left/right are enemy checkers
         if (boardArray[x + 1][y + 1] === 1 && boardArray[x + 1][y - 1] === 1) {
@@ -145,11 +161,13 @@ function possibleMoves(x, y) {
             if (boardArray[x + 2][y + 2] === 0) {
                 var jumpCoordinate = "" + (x + 2) + (y + 2);
                 possibleMovesArray.push(jumpCoordinate);
+                jumpPosition = "" + (x + 1) + (y + 1);
             }
             //check if can jump over left checker
             if (boardArray[x + 2][y - 2] === 0) {
                 var jumpCoordinate = "" + (x + 2) + (y - 2);
                 possibleMovesArray.push(jumpCoordinate);
+                jumpPosition = "" + (x + 1) + (y - 1);
             }
         }
         //if both left/right are checkers
@@ -158,11 +176,16 @@ function possibleMoves(x, y) {
             if (boardArray[x + 1][y + 1] === 1 && boardArray[x + 2][y + 2] === 0) {
                 var jumpCoordinate = "" + (x + 2) + (y + 2);
                 possibleMovesArray.push(jumpCoordinate);
+                // jumpPosition = "" + (x + 1) + (y + 1);
             }
             //if left checker is an enemy and have ability to jump over
             if (boardArray[x + 1][y - 1] === 1 && boardArray[x + 2][y - 2] === 0) {
                 var jumpCoordinate = "" + (x + 2) + (y - 2);
                 possibleMovesArray.push(jumpCoordinate);
+                // jumpPosition = "" + (x + 1) + (y - 1);
+            }
+            if (possibleMovesArray[0] == possibleMovesArray[1]) {
+                possibleMovesArray.pop();
             }
             if (possibleMovesArray[0] == possibleMovesArray[1]) {
                 possibleMovesArray.pop();
@@ -252,46 +275,61 @@ function move() {
     } else {
         $(".circlePiece").click(possibleMoves);
     }
-    console.log(gameBoard);
 }
 
 //go thru possibleMovesArray, apply clickhandlers to those coordinates in array, highlight them on DOM 
 function applyClickToPossible() {
-    // debugger;
     // splitting x and y
-    var firstCoordinate = possibleMovesArray[0];
-    var secondCoordinate = possibleMovesArray[1];
-    var firstX = firstCoordinate[0];
-    var firstY = firstCoordinate[1];
-    if (secondCoordinate !== undefined) {
-        var secondX = secondCoordinate[0];
-        var secondY = secondCoordinate[1];
+
+    var firstCoordinate = null;
+    var secondCoordinate = null;
+    for(var i = 0; i < possibleMovesArray.length; i++){
+        if(i === 0){
+            firstCoordinate = possibleMovesArray[i];
+        }
+        if(i === 1){
+            secondCoordinate = possibleMovesArray[i];
+        }
     }
+
+    var firstX = firstCoordinate[0];    //x coordinate of first array index
+    var firstY = firstCoordinate[1];    //y coordinate of first array index
     var lastPosition = currentPosition;
-    var lastX = parseInt(lastPosition[0]);
-    var lastY = parseInt(lastPosition[1]);
-    if (secondCoordinate === undefined) {
+    var lastX = parseInt(lastPosition[0]);  //current x position 
+    var lastY = parseInt(lastPosition[1]);  //current y position 
+    
+    if (secondCoordinate === null) {
         // if only one possible movement and if jump is possible
         if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) || (Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2)) {
             $("[coordinate=" + firstCoordinate + "]").click(jump);
-        } else {
-            // if only one possible movement and jump isn't possible;
+        } 
+        // if only one possible movement and jump isn't possible;
+        else {
             $("[coordinate=" + firstCoordinate + "]").click(move);
         }
-        // if two movement possible 
-    } else if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) &&
+        return;
+    } 
+    else{
+        var secondX = secondCoordinate[0];
+        var secondY = secondCoordinate[1];
+    }
+    // if two movement possible 
+    if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) &&
         ((Math.abs(lastX - secondX) === 2 && Math.abs(lastY - secondY) === 2))) {
         $("[coordinate=" + firstCoordinate + "]").click(jump);
         $("[coordinate=" + secondCoordinate + "]").click(jump);
-    } else if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) &&
+    }
+     else if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) &&
         ((Math.abs(lastX - secondX) !== 2 && Math.abs(lastY - secondY) !== 2))) {
         $("[coordinate=" + firstCoordinate + "]").click(jump);
         $("[coordinate=" + secondCoordinate + "]").click(move);
-    } else if ((Math.abs(lastX - firstX) !== 2 && Math.abs(lastY - firstY) !== 2) &&
+    }
+     else if ((Math.abs(lastX - firstX) !== 2 && Math.abs(lastY - firstY) !== 2) &&
         ((Math.abs(lastX - secondX) === 2 && Math.abs(lastY - secondY) === 2))) {
         $("[coordinate=" + firstCoordinate + "]").click(move);
         $("[coordinate=" + secondCoordinate + "]").click(jump);
-    } else {
+    }
+     else {
         $("[coordinate=" + firstCoordinate + "]").click(move);
         $("[coordinate=" + secondCoordinate + "]").click(move);
     }
@@ -302,16 +340,39 @@ function display() {
 
 }
 
+
 //jump over enemy piece
 function jump() {
     debugger;
     var position = $(this).attr("coordinate");
-    var thisX = parseInt(position[0]);
+
+
+    var thisX = parseInt(position[0]);  //position of square we are jumping on
     var thisY = parseInt(position[1]);
     var lastPosition = currentPosition;
-    var lastX = parseInt(lastPosition[0]);
+    var lastX = parseInt(lastPosition[0]);  //position before jump
     var lastY = parseInt(lastPosition[1]);
-    var jump = jumpPosition;
+
+
+    //player1's turn, move up the board
+    if (playerTurn === 0) {
+        if (thisY > lastY) {
+            jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY - 1);
+        }
+        else{
+            jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY  + 1);
+        }
+
+    }
+    if (playerTurn === 1) {
+        if (thisY > lastY) {
+            jumpPosition = Math.abs(thisX - 1) + "" + Math.abs(thisY - 1);
+        }
+        else{
+            jumpPosition = Math.abs(thisX - 1) + "" + Math.abs(thisY + 1);
+        }
+    }
+    
     var jumpX = parseInt(jumpPosition[0]);
     var jumpY = parseInt(jumpPosition[1]);
     //if player 2 turn, move the circle pieces, and kill the item in the middle
@@ -374,6 +435,7 @@ function createBoard() {
         }
         gameBoard.append(rowDiv);
     }
+
 }
 
 //checks if a user won, call right after user jumps over another checker
