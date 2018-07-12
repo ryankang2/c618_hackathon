@@ -67,9 +67,6 @@ body {
     bottom: 0;
 }
 
-.avatar img {
-}
-
 .gameBoard {
     width: 48%;
     height: 95%;
@@ -103,27 +100,31 @@ img {
 }
 
 .trianglePiece{
-    background-image: url("img/player1token.png");
+    background-image: url("img/blueCircle.png");
     background-repeat: no-repeat;
-    background-size: 100% 100%; 
+    background-size: 80%;
+    background-position: center;
 }
 
 .circlePiece{
-    background-image: url("img/player2token.png");
+    background-image: url("img/rainbow.png");
     background-repeat: no-repeat;
-    background-size: 100% 100%; 
+    background-size: 100%;
+    background-position: center;
 }
 
 .king.trianglePiece {
-    background-image: url("img/fidget.png");
+    background-image: url("img/kingBlue.png");
     background-repeat: no-repeat;
-    background-size: cover; 
+    background-size: 80%;
+    background-position: center;
 }
 
 .king.circlePiece {
-    background-image: url("img/circle.png");
+    background-image: url("img/kingRed.png");
     background-repeat: no-repeat;
-    background-size: cover; 
+    background-size: 80%;
+    background-position: center;
 }
 
 .highlight {
