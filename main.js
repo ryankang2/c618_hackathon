@@ -240,7 +240,7 @@ function move() {
     $("div").off();
     if (playerTurn === 0) {
         $(".trianglePiece").click(possibleMoves);
-        $(".king..trianglePiece").click()
+        $(".king.trianglePiece").click()
     } else {
         $(".circlePiece").click(possibleMoves);
     }
@@ -276,8 +276,6 @@ function applyClickToPossible() {
             fourthCoordinate = possibleMovesArray[i];
         }
     }
-    var firstX = firstCoordinate[0];    //x coordinate of first array index
-    var firstY = firstCoordinate[1];    //y coordinate of first array index
     var lastPosition = currentPosition;
     var lastX = parseInt(lastPosition[0]);  //current x position 
     var lastY = parseInt(lastPosition[1]);  //current y position 
@@ -293,45 +291,6 @@ function applyClickToPossible() {
             $("[coordinate=" + nextPosition + "]").click(move).addClass("highlight");
         }
     }
-
-    // if (secondCoordinate === null) {
-    //     // if only one possible movement and if jump is possible
-    //     if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2)) {
-    //         $("[coordinate=" + firstCoordinate + "]").click(jump).addClass("highlight");
-
-    //     } 
-    //     // if only one possible movement and jump isn't possible;
-    //     else {
-    //         $("[coordinate=" + firstCoordinate + "]").click(move).addClass("highlight");
-    //     }
-    //     return;
-    // } 
-    // else{
-    //     var secondX = secondCoordinate[0];
-    //     var secondY = secondCoordinate[1];
-    // }
-    // //if highlighted squares already have class highlight, return
-    // if($("[coordinate=" + firstCoordinate + "]").hasClass("highlight") && $("[coordinate=" + secondCoordinate + "]").hasClass("highlight")){
-    //     return;
-    // }
-    // // if two movement possible 
-    // if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) &&
-    //     ((Math.abs(lastX - secondX) === 2 && Math.abs(lastY - secondY) === 2))) {
-    //     $("[coordinate=" + firstCoordinate + "]").click(jump).addClass("highlight");
-    //     $("[coordinate=" + secondCoordinate + "]").click(jump).addClass("highlight");
-
-    // } else if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) &&
-    //     ((Math.abs(lastX - secondX) !== 2 && Math.abs(lastY - secondY) !== 2))) {
-    //     $("[coordinate=" + firstCoordinate + "]").click(jump).addClass("highlight");
-    //     $("[coordinate=" + secondCoordinate + "]").click(move).addClass("highlight");
-    // } else if ((Math.abs(lastX - firstX) !== 2 && Math.abs(lastY - firstY) !== 2) &&
-    //     ((Math.abs(lastX - secondX) === 2 && Math.abs(lastY - secondY) === 2))) {
-    //     $("[coordinate=" + firstCoordinate + "]").click(move).addClass("highlight");
-    //     $("[coordinate=" + secondCoordinate + "]").click(jump).addClass("highlight");
-    // } else {
-    //     $("[coordinate=" + firstCoordinate + "]").click(move).addClass("highlight");
-    //     $("[coordinate=" + secondCoordinate + "]").click(move).addClass("highlight");
-    // }
 
 }
 
