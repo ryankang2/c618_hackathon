@@ -67,7 +67,7 @@ function possibleMoves(x, y) {
         //left space is empty, right space is not empty/defined
         if (boardArray[x - 1][y - 1] === 0 && (boardArray[x - 1][y + 1] !== 0 && typeof boardArray[x - 1][y + 1] != undefined)) {
             //can jump over right enemy checker
-            if (x - 2 > 0 && boardArray[x - 2][y + 2] === 0) {
+            if (x - 2 > 0 && boardArray[x - 2][y + 2] === 0 && boardArray[x-1][y+1] === 2) {
                 var jumpCoordinate = "" + (x - 2) + (y + 2);
                 possibleMovesArray.push(jumpCoordinate);
                 jumpPosition = "" + (x - 1) + (y + 1);
@@ -79,7 +79,7 @@ function possibleMoves(x, y) {
         //right space is empty, left space is not empty/defined
         if (boardArray[x - 1][y + 1] === 0 && (boardArray[x - 1][y - 1] !== 0) && typeof boardArray[x - 1][y - 1] != undefined) {
             //can jump over left enemy checker
-            if (x - 2 > 0 && boardArray[x - 2][y - 2] === 0) {
+            if (x - 2 > 0 && boardArray[x - 2][y - 2] === 0 && boardArray[x-1][y-1] === 2) {
                 var jumpCoordinate = "" + (x - 2) + (y - 2);
                 possibleMovesArray.push(jumpCoordinate);
                 jumpPosition = "" + (x - 1) + (y - 1);
@@ -118,6 +118,7 @@ function possibleMoves(x, y) {
             }
         }
     }
+
     //playerTwoMovement, goes down board
     if (boardArray[x][y] === 2 || boardArray[x][y] === 4) {
         //check if left/right are same team
@@ -134,7 +135,7 @@ function possibleMoves(x, y) {
         //left space is empty, right space is not empty/defined
         if (boardArray[x + 1][y - 1] === 0 && (boardArray[x + 1][y + 1] !== 0 && typeof boardArray[x + 1][y + 1] != "undefined")) {
             //can jump over right enemy checker
-            if (x + 2 < 8 && boardArray[x + 2][y + 2] === 0) {
+            if (x + 2 < 8 && boardArray[x + 2][y + 2] === 0 && boardArray[x+1][y+1] === 1) {
                 var jumpCoordinate = "" + (x + 2) + (y + 2);
                 possibleMovesArray.push(jumpCoordinate);
                 jumpPosition = "" + (x + 1) + (y + 1);
@@ -145,7 +146,7 @@ function possibleMoves(x, y) {
         //right space is empty, left space is not empty/defined
         if (boardArray[x + 1][y + 1] === 0 && (boardArray[x + 1][y - 1] !== 0 && typeof boardArray[x + 1][y - 1] != "undefined")) {
             //can jump over left enemy checker
-            if (x + 2 < 8  && boardArray[x + 2][y - 2] === 0) {
+            if (x + 2 < 8  && boardArray[x + 2][y - 2] === 0 && boardArray[x+1][y-1] === 1) {
                 var jumpCoordinate = "" + (x + 2) + (y - 2);
                 possibleMovesArray.push(jumpCoordinate);
                 jumpPosition = "" + (x + 1) + (y - 1);
@@ -199,6 +200,7 @@ function possibleMoves(x, y) {
 //update the movement with 1 or 2
 function move() {
     //position -> new position that we clicked on...the spot we want to move to
+<<<<<<< HEAD
     var position = $(this).attr("coordinate"); 
     var thisX = parseInt(position[0]);
     var thisY = parseInt(position[1]);
@@ -230,6 +232,17 @@ function move() {
         playerTurn = 1 - playerTurn;
         
     }
+=======
+    var position = $(this).attr("coordinate");
+    // var thisX = parseInt(position[0]);
+    // var thisY = parseInt(position[1]);
+    // var lastPosition = currentPosition;
+    // var lastX = parseInt(lastPosition[0]);
+    // var lastY = parseInt(lastPosition[1]);
+    //if player 2 turn, move the circle pieces
+    checkPawnOrKing(position);
+    playerTurn = 1 - playerTurn;
+>>>>>>> 1035280c4662338d2098cecdfe69b9cb76bff208
     //turn off all divs, but apply click handler to next player's pieces
     $("div").off();
     if (playerTurn === 0) {
@@ -244,8 +257,12 @@ function move() {
 //go thru possibleMovesArray, apply clickhandlers to those coordinates in array, highlight them on DOM 
 function applyClickToPossible() {
     // turn off click and enable again to prevent changing coin choice
+<<<<<<< HEAD
 
     // $("div").off().removeClass("highlight");
+=======
+    $(".gameBoard div").off().removeClass("highlight");
+>>>>>>> 1035280c4662338d2098cecdfe69b9cb76bff208
     if (playerTurn === 0) {
         $(".trianglePiece").click(possibleMoves);
     } else {
@@ -313,8 +330,6 @@ function applyClickToPossible() {
 //jump over enemy piece
 function jump() {
     var position = $(this).attr("coordinate");
-
-
     var thisX = parseInt(position[0]);  //position of square we are jumping on
     var thisY = parseInt(position[1]);
     var lastPosition = currentPosition;
@@ -435,6 +450,7 @@ function turnHighlight () {
 //resets game
 function reset(){
     console.log("button pressed");
+    $(".gameBoard").empty();
     playerOneTokens = 12;
     playerTwoTokens = 12;
     possibleMovesArray = [];
@@ -453,4 +469,40 @@ function reset(){
         [1, 0, 1, 0, 1, 0, 1, 0],
     ];    
     initializeApp();
+}
+
+function checkPawnOrKing(position) {
+    var thisX = parseInt(position[0]);
+    var thisY = parseInt(position[1]);
+    var lastPosition = currentPosition;
+    var lastX = parseInt(lastPosition[0]);
+    var lastY = parseInt(lastPosition[1]);
+    // check and change if player 2 coin movement turns to king or not
+    if (playerTurn === 1) {
+        if(thisX === 7){
+            console.log("KING CIRCLE");
+            boardArray[lastX][lastY] = 0;
+            boardArray[thisX][thisY] = 4;
+            $("[coordinate=" + position + "]").addClass("king");
+        } else {
+            boardArray[lastX][lastY] = 0;
+            boardArray[thisX][thisY] = 2;
+            $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
+            $("[coordinate=" + position + "]").addClass("circlePiece");
+        }
+    }
+    // check and change if player 2 coin movement turns to king or not
+    else {
+        if(thisX === 0){
+            console.log("KING TRIANGLE");
+            boardArray[lastX][lastY] = 0;
+            boardArray[thisX][thisY] = 3;
+            $("[coordinate=" + lastPosition + "]").addClass("king");
+        } else {
+            boardArray[lastX][lastY] = 0;
+            boardArray[thisX][thisY] = 1;
+            $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
+            $("[coordinate=" + position + "]").addClass("trianglePiece");
+        }
+    }
 }
