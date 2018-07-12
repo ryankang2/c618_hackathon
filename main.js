@@ -265,12 +265,7 @@ function display() {
 }
 
 //jump over enemy piece
-<<<<<<< HEAD
-function jump() {
-    console.log("I jumped");
-}
 
-=======
 function jump(jumpPosition) {
     debugger;
     var position = $(this).attr("coordinate");
@@ -307,7 +302,6 @@ function jump(jumpPosition) {
     }
 }
 
->>>>>>> c23231789585a6c60e360b193f8f8b25efc4e27a
 //function to dynamically create board
 function createBoard() {
     gameBoard = $(".gameBoard");
