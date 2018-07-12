@@ -410,6 +410,7 @@ function turnHighlight () {
 //resets game
 function reset(){
     console.log("button pressed");
+    $(".gameBoard").empty();
     playerOneTokens = 12;
     playerTwoTokens = 12;
     possibleMovesArray = [];
