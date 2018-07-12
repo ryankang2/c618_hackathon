@@ -343,6 +343,7 @@ function jump() {
     var lastY = parseInt(lastPosition[1]);
 
     //making jumpPosition based on choice
+    // need to add king opposite
     if (playerTurn === 0) {
         if (thisY > lastY) {
             jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY - 1);
