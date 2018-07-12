@@ -96,7 +96,7 @@ function possibleMoves(x, y) {
             }
             //if left checker is an enemy and have ability to jump over
             if(boardArray[x-1][y-1] === 2 && boardArray[x-2][y-2] === 0){
-                var jumpCoordinate = "" + (x-2) + (y+2);
+                var jumpCoordinate = "" + (x-2) + (y-2);
                 possibleMovesArray.push(jumpCoordinate);
             }
         }
@@ -140,7 +140,20 @@ function possibleMoves(x, y) {
             }
             //check if can jump over left checker
             if(boardArray[x+2][y-2] === 0){
+                var jumpCoordinate = "" + (x+2) + (y-2);
+                possibleMovesArray.push(jumpCoordinate);
+            }
+        }
+        //if both left/right are checkers
+        if(boardArray[x+1][y+1] !== 0 && boardArray[x+1][y-1] !== 0){
+            //if right checker is an enemy and have ability to jump over
+            if(boardArray[x+1][y+1] === 1 && boardArray[x+2][y+2] === 0){
                 var jumpCoordinate = "" + (x+2) + (y+2);
+                possibleMovesArray.push(jumpCoordinate);
+            }
+            //if left checker is an enemy and have ability to jump over
+            if(boardArray[x+1][y-1] === 1 && boardArray[x+2][y-2] === 0){
+                var jumpCoordinate = "" + (x+2) + (y-22);
                 possibleMovesArray.push(jumpCoordinate);
             }
         }
