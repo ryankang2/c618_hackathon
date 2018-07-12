@@ -86,7 +86,6 @@ function possibleMoves(x, y) {
     var y = parseInt(currentPosition[1]);
     if(boardArray[x][y] == 3 || boardArray[x][y] == 4){
         kingMoves(x,y);
-        return;
     }
     //playerOneMovement, goes up board
     if (boardArray[x][y] === 1) {
@@ -280,8 +279,7 @@ function applyClickToPossible() {
     var lastPosition = currentPosition;
     var lastX = parseInt(lastPosition[0]);  //current x position 
     var lastY = parseInt(lastPosition[1]);  //current y position 
-    
-<<<<<<< HEAD
+
     for (var i = 0; i < possibleMovesArray.length; i++) {
         var nextPosition = possibleMovesArray[i];
         var nextX = nextPosition[0];
@@ -291,17 +289,6 @@ function applyClickToPossible() {
             $("[coordinate=" + nextPosition + "]").click(jump).addClass("highlight");
         } else {
             $("[coordinate=" + nextPosition + "]").click(move).addClass("highlight");
-=======
-    if (secondCoordinate === null) {
-        // if only one possible movement and if jump is possible
-        if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2)) {
-            $("[coordinate=" + firstCoordinate + "]").click(jump).addClass("highlight");
-
-        } 
-        // if only one possible movement and jump isn't possible;
-        else {
-            $("[coordinate=" + firstCoordinate + "]").click(move).addClass("highlight");
->>>>>>> 5123bdc344a22ff6c0fe85228aae8d80f3e5caf3
         }
     }
 
@@ -480,6 +467,9 @@ function checkPawnOrKing(position, jumpPosition) {
     var lastPosition = currentPosition;
     var lastX = parseInt(lastPosition[0]);
     var lastY = parseInt(lastPosition[1]);
+    if (boardArray[lastX][lastY]){
+        
+    }
     // for jump();
     if (jumpPosition != null) {
         var jumpX = parseInt(jumpPosition[0]);
