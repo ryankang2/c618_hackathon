@@ -75,18 +75,33 @@ function possibleMoves(x, y) {
             possibleMovesArray.push(firstCoordinate);
         }
         //if both left/right are enemy checkers
-        if (boardArray[x - 1][y + 1] === 2 && boardArray[x - 1][y + 1] === 2) {
+        if (boardArray[x - 1][y + 1] === 2 && boardArray[x - 1][y - 1] === 2) {
             //check if can jump over right enemy checker
             if (boardArray[x - 2][y + 2] === 0) {
                 var jumpCoordinate = "" + (x - 2) + (y + 2);
                 possibleMovesArray.push(jumpCoordinate);
             }
+            //check if can jump over left enemey checker
             if (boardArray[x - 2][y - 2] === 0){
-                var jumpCoordinate = "" + (x - 2) + (x - 2);
+                var jumpCoordinate = "" + (x - 2) + (y - 2);
                 possibleMovesArray.push(jumpCoordinate);
             }
         }
+        //if both left/right are checkers 
+        if(boardArray[x-1][y+1] != 0 && boardArray[x-1][y-1] != 0){
+            //if right checker is a enemy and have ability to jump over
+            if(boardArray[x-1][y+1] === 2 && boardArray[x-2][y+2] === 0){
+                var jumpCoordinate = "" + (x-2) + (y+2);
+                possibleMovesArray.push(jumpCoordinate);
+            }
+            //if left checker is an enemy and have ability to jump over
+            if(boardArray[x-1][y-1] === 2 && boardArray[x-2]){
+                
+            }
+
+        }
     }
+
     //playerTwoMovement, goes down board
     if (boardArray[x][y] === 2) {
         //if both spaces are empty
@@ -116,13 +131,23 @@ function possibleMoves(x, y) {
             possibleMovesArray.push(firstCoordinate);
             console.log("possible Array: ", possibleMovesArray);
         }
+        //if both left/right are enemy checkers
+        if(boardArray[x+1][y+1] === 1 && boardArray[x+1][y-1] === 1){
+            //check if can jump over right checker
+            if(boardArray[x+2][y+2] === 0){
+                var jumpCoordinate = "" + (x+2) + (y+2);
+                possibleMovesArray.push(jumpCoordinate);
+            }
+            //check if can jump over left checker
+            if(boardArray[x+2][y-2] === 0){
+                var jumpCoordinate = "" + (x+2) + (y+2);
+                possibleMovesArray.push(jumpCoordinate);
+            }
+        }
     }
     applyClickToPossible();
     console.log("possible Array: ", possibleMovesArray);
-
 }
-
-
 
 //subfunction to monitor player one movement
 function playerOneMovement(x, y) {
