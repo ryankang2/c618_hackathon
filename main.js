@@ -32,6 +32,9 @@ function initializeApp() {
     createBoard();
     applyClickHandlers();
     turnHighlight();
+    deathCounter();
+    $(".reset").click(reset);
+  
 }
 
 
@@ -41,7 +44,7 @@ function applyClickHandlers() {
     } else {
         $(".circlePiece").click(possibleMoves);
     }
-    $(".reset").click(reset);
+
 }
 
 
@@ -51,8 +54,9 @@ function kingMoves(x, y) {
         for (var j = y - 2; j <= y + 2; j++) {
             //takes care of kings on edge
             if (i > 7 || i < 0 || j < 0 || j > 7) {
-                break;
-            } else {
+                
+            } 
+            else {
                 if (boardArray[i][j] !== boardArray[x][y]) {
                     fakeArray.push("" + i + j);
                 }
@@ -101,7 +105,7 @@ function possibleMoves(x, y) {
         //left space is empty, right space is not empty/defined
         if (boardArray[x - 1][y - 1] === 0 && (boardArray[x - 1][y + 1] !== 0 && typeof boardArray[x - 1][y + 1] != undefined)) {
             //can jump over right enemy checker
-            if (x - 2 >= 0 && boardArray[x - 2][y + 2] === 0 && boardArray[x - 1][y + 1] === 2) {
+            if (x - 2 >= 0 && boardArray[x - 2][y + 2] === 0 && (boardArray[x - 1][y + 1] === 2 || boardArray[x-1][y+1] === 4)) {
                 var jumpCoordinate = "" + (x - 2) + (y + 2);
                 possibleMovesArray.push(jumpCoordinate);
                 jumpPosition = "" + (x - 1) + (y + 1);
@@ -113,7 +117,7 @@ function possibleMoves(x, y) {
         //right space is empty, left space is not empty/defined
         if (boardArray[x - 1][y + 1] === 0 && (boardArray[x - 1][y - 1] !== 0) && typeof boardArray[x - 1][y - 1] != undefined) {
             //can jump over left enemy checker
-            if (x - 2 >= 0 && boardArray[x - 2][y - 2] === 0 && boardArray[x - 1][y - 1] === 2) {
+            if (x - 2 >= 0 && boardArray[x - 2][y - 2] === 0 && (boardArray[x - 1][y - 1] === 2 || boardArray[x-1][y-1] === 4)) {
                 var jumpCoordinate = "" + (x - 2) + (y - 2);
                 possibleMovesArray.push(jumpCoordinate);
                 jumpPosition = "" + (x - 1) + (y - 1);
@@ -138,12 +142,12 @@ function possibleMoves(x, y) {
         //if both left/right are checkers 
         if (boardArray[x - 1][y + 1] != 0 && boardArray[x - 1][y - 1] != 0 && possibleMovesArray.length < 2) {
             //if right checker is a enemy and have ability to jump over
-            if (boardArray[x - 1][y + 1] === 2 && boardArray[x - 2][y + 2] === 0) {
+            if ((boardArray[x - 1][y + 1] === 2 || boardArray[x-1][y+1] === 4) && boardArray[x - 2][y + 2] === 0) {
                 var jumpCoordinate = "" + (x - 2) + (y + 2);
                 possibleMovesArray.push(jumpCoordinate);
             }
             //if left checker is an enemy and have ability to jump over
-            if (boardArray[x - 1][y - 1] === 2 && boardArray[x - 2][y - 2] === 0) {
+            if ((boardArray[x - 1][y - 1] === 2 || boardArray[x-1][y-1] === 4)&& boardArray[x - 2][y - 2] === 0) {
                 var jumpCoordinate = "" + (x - 2) + (y - 2);
                 possibleMovesArray.push(jumpCoordinate);
             }
@@ -169,7 +173,7 @@ function possibleMoves(x, y) {
         //left space is empty, right space is not empty/defined
         if (boardArray[x + 1][y - 1] === 0 && (boardArray[x + 1][y + 1] !== 0 && typeof boardArray[x + 1][y + 1] != undefined)) {
             //can jump over right enemy checker
-            if (x + 2 < 8 && boardArray[x + 2][y + 2] === 0 && boardArray[x + 1][y + 1] === 1) {
+            if (x + 2 < 8 && boardArray[x + 2][y + 2] === 0 && (boardArray[x + 1][y + 1] === 1 || boardArray[x+1][y+1] === 3)) {
                 var jumpCoordinate = "" + (x + 2) + (y + 2);
                 possibleMovesArray.push(jumpCoordinate);
                 jumpPosition = "" + (x + 1) + (y + 1);
@@ -180,7 +184,7 @@ function possibleMoves(x, y) {
         //right space is empty, left space is not empty/defined
         if (boardArray[x + 1][y + 1] === 0 && (boardArray[x + 1][y - 1] !== 0 && typeof boardArray[x + 1][y - 1] != undefined)) {
             //can jump over left enemy checker
-            if (x + 2 < 8 && boardArray[x + 2][y - 2] === 0 && boardArray[x + 1][y - 1] === 1) {
+            if (x + 2 < 8 && boardArray[x + 2][y - 2] === 0 && (boardArray[x + 1][y - 1] === 1|| boardArray[x+1][y-1] === 3)) {
                 var jumpCoordinate = "" + (x + 2) + (y - 2);
                 possibleMovesArray.push(jumpCoordinate);
                 jumpPosition = "" + (x + 1) + (y - 1);
@@ -207,13 +211,13 @@ function possibleMoves(x, y) {
         //if both left/right are checkers
         if (boardArray[x + 1][y + 1] !== 0 && boardArray[x + 1][y - 1] !== 0 && possibleMovesArray.length < 2) {
             //if right checker is an enemy and have ability to jump over
-            if (boardArray[x + 1][y + 1] === 1 && boardArray[x + 2][y + 2] === 0) {
+            if ((boardArray[x + 1][y + 1] === 1 || boardArray[x+1][y+1] === 3) && boardArray[x + 2][y + 2] === 0) {
                 var jumpCoordinate = "" + (x + 2) + (y + 2);
                 possibleMovesArray.push(jumpCoordinate);
                 // jumpPosition = "" + (x + 1) + (y + 1);
             }
             //if left checker is an enemy and have ability to jump over
-            if (boardArray[x + 1][y - 1] === 1 && boardArray[x + 2][y - 2] === 0) {
+            if ((boardArray[x + 1][y - 1] === 1 || boardArray[x+1][y-1] === 3)&& boardArray[x + 2][y - 2] === 0) {
                 var jumpCoordinate = "" + (x + 2) + (y - 2);
                 possibleMovesArray.push(jumpCoordinate);
                 // jumpPosition = "" + (x + 1) + (y - 1);
@@ -238,6 +242,7 @@ function move() {
     $("div").off();
     if (playerTurn === 0) {
         $(".trianglePiece").click(possibleMoves);
+        $(".king.trianglePiece").click()
     } else {
         $(".circlePiece").click(possibleMoves);
     }
@@ -291,45 +296,6 @@ function applyClickToPossible() {
         }
     }
 
-    // if (secondCoordinate === null) {
-    //     // if only one possible movement and if jump is possible
-    //     if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2)) {
-    //         $("[coordinate=" + firstCoordinate + "]").click(jump).addClass("highlight");
-
-    //     } 
-    //     // if only one possible movement and jump isn't possible;
-    //     else {
-    //         $("[coordinate=" + firstCoordinate + "]").click(move).addClass("highlight");
-    //     }
-    //     return;
-    // } 
-    // else{
-    //     var secondX = secondCoordinate[0];
-    //     var secondY = secondCoordinate[1];
-    // }
-    // //if highlighted squares already have class highlight, return
-    // if($("[coordinate=" + firstCoordinate + "]").hasClass("highlight") && $("[coordinate=" + secondCoordinate + "]").hasClass("highlight")){
-    //     return;
-    // }
-    // // if two movement possible 
-    // if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) &&
-    //     ((Math.abs(lastX - secondX) === 2 && Math.abs(lastY - secondY) === 2))) {
-    //     $("[coordinate=" + firstCoordinate + "]").click(jump).addClass("highlight");
-    //     $("[coordinate=" + secondCoordinate + "]").click(jump).addClass("highlight");
-
-    // } else if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) &&
-    //     ((Math.abs(lastX - secondX) !== 2 && Math.abs(lastY - secondY) !== 2))) {
-    //     $("[coordinate=" + firstCoordinate + "]").click(jump).addClass("highlight");
-    //     $("[coordinate=" + secondCoordinate + "]").click(move).addClass("highlight");
-    // } else if ((Math.abs(lastX - firstX) !== 2 && Math.abs(lastY - firstY) !== 2) &&
-    //     ((Math.abs(lastX - secondX) === 2 && Math.abs(lastY - secondY) === 2))) {
-    //     $("[coordinate=" + firstCoordinate + "]").click(move).addClass("highlight");
-    //     $("[coordinate=" + secondCoordinate + "]").click(jump).addClass("highlight");
-    // } else {
-    //     $("[coordinate=" + firstCoordinate + "]").click(move).addClass("highlight");
-    //     $("[coordinate=" + secondCoordinate + "]").click(move).addClass("highlight");
-    // }
-
 }
 
 
@@ -341,14 +307,23 @@ function jump() {
     var lastPosition = currentPosition;
     var lastX = parseInt(lastPosition[0]); //position before jump
     var lastY = parseInt(lastPosition[1]);
-
+    debugger;
     //making jumpPosition based on choice
     // need to add king opposite
     if (playerTurn === 0) {
-        if (thisY > lastY) {
-            jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY - 1);
-        } else {
-            jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY + 1);
+        if(boardArray[lastX][lastY] === 3){
+            if (thisY > lastY) {
+                jumpPosition = Math.abs(thisX - 1) + "" + Math.abs(thisY - 1);
+            } else {
+                jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY + 1);
+            }
+        }
+        else{
+            if (thisY > lastY) {
+                jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY - 1);
+            } else {
+                jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY + 1);
+            }
         }
     }
     if (playerTurn === 1) {
@@ -423,6 +398,12 @@ function checkWin() {
     }
     return false;
 }
+function deathCounter() { //updates Counts for deaths 
+    var p1deathcounter = $(".counterLeft");
+    var p2deathcounter = $(".counterRight");
+    p1deathcounter.text(playerOneTokens);
+    p2deathcounter.text(playerTwoTokens);
+}
 
 // turns on the highlights for selected 
 function turnHighlight() {
@@ -467,7 +448,6 @@ function checkPawnOrKing(position, jumpPosition) {
     var lastY = parseInt(lastPosition[1]);
     //check if king
     if (boardArray[lastX][lastY] === 3 || boardArray[lastX][lastY] === 4) {
-        debugger;
         //check if king is jumpable
         if (jumpPosition != null) {
             var jumpX = parseInt(jumpPosition[0]);
@@ -523,6 +503,7 @@ function checkPawnOrKing(position, jumpPosition) {
                 boardArray[thisX][thisY] = 2;
                 $("[coordinate=" + lastPosition + "]").removeClass("king circlePiece");
                 $("[coordinate=" + position + "]").addClass("circlePiece");
+                
             }
         }
         // check and change if player 2 coin movement turns to king or not
@@ -532,11 +513,13 @@ function checkPawnOrKing(position, jumpPosition) {
                 boardArray[thisX][thisY] = 3;
                 $("[coordinate=" + position + "]").addClass("king trianglePiece");
                 $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
+              
             } else {
                 boardArray[lastX][lastY] = 0;
                 boardArray[thisX][thisY] = 1;
                 $("[coordinate=" + lastPosition + "]").removeClass("king trianglePiece");
                 $("[coordinate=" + position + "]").addClass("trianglePiece");
+               
             }
         }
         // for jump();

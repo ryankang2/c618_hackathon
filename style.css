@@ -1,3 +1,8 @@
+@font-face {
+    font-family: neon;
+    src: url("font/AUTOMANI.TTF");
+
+}
 body {
     width: 100vw;
     height: 100vh;
@@ -38,9 +43,41 @@ body {
     box-sizing: border-box;
     position: relative;
 }
+.counterLeft {
+    display: flex;
+    font-size: 3vh;
+    font-family: neon;
+    color: #09CEEC;
+    opacity: 0.7;
+    text-align: center;
+    flex-direction: column;
+}
+
+.counterRight {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 3vh;
+    font-family: neon;
+    color: #ef155d;
+}
 
 .tokensTaken {
     height: 75%;
+    position: absolute;
+    bottom: 0;
+}
+
+.tokensTaken img {
+    height: 30%;
+    position : relative;
+    
+}
+
+.right.tokensTaken {
+    height: 75%;
+
 }
 
 .right .avatar {
