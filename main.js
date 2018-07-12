@@ -486,9 +486,9 @@ function checkPawnOrKing(position, jumpPosition) {
             //king move - player 1
             else {
                     boardArray[lastX][lastY] = 0;
-                    boardArray[thisX][thisY] = 1;
-                    $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
-                    $("[coordinate=" + position + "]").addClass("trianglePiece");
+                    boardArray[thisX][thisY] = 3;
+                    $("[coordinate=" + lastPosition + "]").removeClass("king trianglePiece");
+                    $("[coordinate=" + position + "]").addClass("king trianglePiece");
             }
         }
     } else {
