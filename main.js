@@ -100,9 +100,10 @@ function possibleMoves(x,y) {
                 possibleMovesArray.push(jumpCoordinate);
             }
             //if left checker is an enemy and have ability to jump over
-            // if(boardArray[x-1][y-1] === 2 && boardArray[x-2]){
-                
-            // }
+            if(boardArray[x-1][y-1] === 2 && boardArray[x-2][y-2] === 0){
+                var jumpCoordinate = "" + (x-2) + (y+2);
+                possibleMovesArray.push(jumpCoordinate);
+            }
         }
     }
 
@@ -126,7 +127,7 @@ function possibleMoves(x,y) {
             possibleMovesArray.push(firstCoordinate);
         }
         //right space is empty, left space is not empty/defined
-        if(boardArray[x+1][y+1] === 0 && (boardArray[x+1][y-1] !== 0 && typeof boardArray[x+1][y-1] != undefined)){}
+        if(boardArray[x+1][y+1] === 0 && (boardArray[x+1][y-1] !== 0 && typeof boardArray[x+1][y-1] != undefined)){
             //can jump over left enemy checker
             if(boardArray[x+2][y-2] === 0){
                 var jumpCoordinate = "" + (x+2) + (y-2);
@@ -318,8 +319,13 @@ function jump() {
         $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
         $("[coordinate=" + jumpPosition + "]").removeClass("circlePiece");
         $("[coordinate=" + position + "]").addClass("trianglePiece");
-        jump(jumpPosition);
         playerTurn = 1 - playerTurn;
+    }
+    $("div").off();
+    if (playerTurn === 0) {
+        $(".trianglePiece").click(possibleMoves);
+    } else {
+        $(".circlePiece").click(possibleMoves);
     }
 }
 
