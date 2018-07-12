@@ -153,7 +153,7 @@ function possibleMoves(x, y) {
             }
             //if left checker is an enemy and have ability to jump over
             if(boardArray[x+1][y-1] === 1 && boardArray[x+2][y-2] === 0){
-                var jumpCoordinate = "" + (x+2) + (y-22);
+                var jumpCoordinate = "" + (x+2) + (y-2);
                 possibleMovesArray.push(jumpCoordinate);
             }
         }
