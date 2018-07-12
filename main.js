@@ -207,7 +207,7 @@ function move() {
     // var lastX = parseInt(lastPosition[0]);
     // var lastY = parseInt(lastPosition[1]);
     //if player 2 turn, move the circle pieces
-    checkPawnOrKing(postiion);
+    checkPawnOrKing(position);
     playerTurn = 1 - playerTurn;
     //turn off all divs, but apply click handler to next player's pieces
     $("div").off();
@@ -291,8 +291,6 @@ function applyClickToPossible() {
 //jump over enemy piece
 function jump() {
     var position = $(this).attr("coordinate");
-
-
     var thisX = parseInt(position[0]);  //position of square we are jumping on
     var thisY = parseInt(position[1]);
     var lastPosition = currentPosition;
@@ -451,7 +449,6 @@ function checkPawnOrKing(position) {
             $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
             $("[coordinate=" + position + "]").addClass("circlePiece");
         }
-        playerTurn = 1 - playerTurn;
     }
     // check and change if player 2 coin movement turns to king or not
     else {
@@ -460,12 +457,11 @@ function checkPawnOrKing(position) {
             boardArray[lastX][lastY] = 0;
             boardArray[thisX][thisY] = 3;
             $("[coordinate=" + lastPosition + "]").addClass("king");
+        } else {
+            boardArray[lastX][lastY] = 0;
+            boardArray[thisX][thisY] = 1;
+            $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
+            $("[coordinate=" + position + "]").addClass("trianglePiece");
         }
-        //king for player1 -> 3
-        boardArray[lastX][lastY] = 0;
-        boardArray[thisX][thisY] = 3;
-        $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
-        $("[coordinate=" + position + "]").addClass("trianglePiece");
-        playerTurn = 1 - playerTurn;
     }
 }
