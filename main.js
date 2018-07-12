@@ -230,7 +230,7 @@ function applyClickToPossible() {
         $(".circlePiece").click(possibleMoves);
     }
     // splitting x and y
-     var firstCoordinate = null;
+    var firstCoordinate = null;
     var secondCoordinate = null;
     for(var i = 0; i < possibleMovesArray.length; i++){
         if(i === 0){
@@ -246,45 +246,57 @@ function applyClickToPossible() {
     var lastX = parseInt(lastPosition[0]);  //current x position 
     var lastY = parseInt(lastPosition[1]);  //current y position 
     
-
-    if (secondCoordinate === null) {
-        // if only one possible movement and if jump is possible
-        if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) || (Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2)) {
-            $("[coordinate=" + firstCoordinate + "]").click(jump).addClass("highlight");
-
-        } 
-        // if only one possible movement and jump isn't possible;
-        else {
-            $("[coordinate=" + firstCoordinate + "]").click(move).addClass("highlight");
+    for (var i = 0; i < possibleMovesArray.length; i++) {
+        var nextPosition = possibleMovesArray[i];
+        var nextX = nextPosition[0];
+        var nextY = nextPosition[1];
+        // if 2 length away, assume jumpable
+        if ((Math.abs(lastX - nextX) === 2 && Math.abs(lastY - nextY) === 2)) {
+            $("[coordinate=" + nextPosition + "]").click(jump).addClass("highlight");
+        } else {
+            $("[coordinate=" + nextPosition + "]").click(move).addClass("highlight");
         }
-        return;
-    } 
-    else{
-        var secondX = secondCoordinate[0];
-        var secondY = secondCoordinate[1];
     }
-    //if highlighted squares already have class highlight, return
-    if($("[coordinate=" + firstCoordinate + "]").hasClass("highlight") && $("[coordinate=" + secondCoordinate + "]").hasClass("highlight")){
-        return;
-    }
-    // if two movement possible 
-    if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) &&
-        ((Math.abs(lastX - secondX) === 2 && Math.abs(lastY - secondY) === 2))) {
-        $("[coordinate=" + firstCoordinate + "]").click(jump).addClass("highlight");
-        $("[coordinate=" + secondCoordinate + "]").click(jump).addClass("highlight");
 
-    } else if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) &&
-        ((Math.abs(lastX - secondX) !== 2 && Math.abs(lastY - secondY) !== 2))) {
-        $("[coordinate=" + firstCoordinate + "]").click(jump).addClass("highlight");
-        $("[coordinate=" + secondCoordinate + "]").click(move).addClass("highlight");
-    } else if ((Math.abs(lastX - firstX) !== 2 && Math.abs(lastY - firstY) !== 2) &&
-        ((Math.abs(lastX - secondX) === 2 && Math.abs(lastY - secondY) === 2))) {
-        $("[coordinate=" + firstCoordinate + "]").click(move).addClass("highlight");
-        $("[coordinate=" + secondCoordinate + "]").click(jump).addClass("highlight");
-    } else {
-        $("[coordinate=" + firstCoordinate + "]").click(move).addClass("highlight");
-        $("[coordinate=" + secondCoordinate + "]").click(move).addClass("highlight");
-    }
+    // if (secondCoordinate === null) {
+    //     // if only one possible movement and if jump is possible
+    //     if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2)) {
+    //         $("[coordinate=" + firstCoordinate + "]").click(jump).addClass("highlight");
+
+    //     } 
+    //     // if only one possible movement and jump isn't possible;
+    //     else {
+    //         $("[coordinate=" + firstCoordinate + "]").click(move).addClass("highlight");
+    //     }
+    //     return;
+    // } 
+    // else{
+    //     var secondX = secondCoordinate[0];
+    //     var secondY = secondCoordinate[1];
+    // }
+    // //if highlighted squares already have class highlight, return
+    // if($("[coordinate=" + firstCoordinate + "]").hasClass("highlight") && $("[coordinate=" + secondCoordinate + "]").hasClass("highlight")){
+    //     return;
+    // }
+    // // if two movement possible 
+    // if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) &&
+    //     ((Math.abs(lastX - secondX) === 2 && Math.abs(lastY - secondY) === 2))) {
+    //     $("[coordinate=" + firstCoordinate + "]").click(jump).addClass("highlight");
+    //     $("[coordinate=" + secondCoordinate + "]").click(jump).addClass("highlight");
+
+    // } else if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) &&
+    //     ((Math.abs(lastX - secondX) !== 2 && Math.abs(lastY - secondY) !== 2))) {
+    //     $("[coordinate=" + firstCoordinate + "]").click(jump).addClass("highlight");
+    //     $("[coordinate=" + secondCoordinate + "]").click(move).addClass("highlight");
+    // } else if ((Math.abs(lastX - firstX) !== 2 && Math.abs(lastY - firstY) !== 2) &&
+    //     ((Math.abs(lastX - secondX) === 2 && Math.abs(lastY - secondY) === 2))) {
+    //     $("[coordinate=" + firstCoordinate + "]").click(move).addClass("highlight");
+    //     $("[coordinate=" + secondCoordinate + "]").click(jump).addClass("highlight");
+    // } else {
+    //     $("[coordinate=" + firstCoordinate + "]").click(move).addClass("highlight");
+    //     $("[coordinate=" + secondCoordinate + "]").click(move).addClass("highlight");
+    // }
+
 }
 
 
