@@ -378,19 +378,19 @@ function jump() {
     $(".gameBoard div").removeClass("highlight");
 }
 
-function toKing (position) {
-    var King= $(this);
-    if (playerTurn === 0) {
-     if (position[0] === "0")
-       King.addClass('king')
-    }
-    else {
-        var King= $(this);
-        King.addClass('king')
+// function toKing (position) {
+//     var King= $(this);
+//     if (playerTurn === 0) {
+//      if (position[0] === "0")
+//        King.addClass('king')
+//     }
+//     else {
+//         if (playerTurn === 1) {
+//             if (position[0] === "7")
+//               King.addClass('king')
+//      }
         
-     }
-        
-}
+// }
 
 //function to dynamically create board
 function createBoard() {
