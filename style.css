@@ -44,22 +44,40 @@ body {
     position: relative;
 }
 .counterLeft {
+    display: flex;
+    font-size: 3vh;
+    font-family: neon;
+    color: #09CEEC;
+    opacity: 0.7;
+    text-align: center;
+    flex-direction: column;
+}
+
+.counterRight {
     color: white;
     display: flex;
-    justify-content: center;
     flex-direction: column;
     text-align: center;
     font-size: 3vh;
-    font-size: center;
     font-family: neon;
-    color: #09CEEC;
-
+    color: #ef155d;
 }
 
 .tokensTaken {
     height: 75%;
+    position: absolute;
+    bottom: 0;
+}
 
+.tokensTaken img {
+    height: 30%;
+    position : relative;
     
+}
+
+.right.tokensTaken {
+    height: 75%;
+
 }
 
 .right .avatar {

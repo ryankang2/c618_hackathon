@@ -33,6 +33,8 @@ function initializeApp() {
     applyClickHandlers();
     turnHighlight();
     deathCounter();
+    $(".reset").click(reset);
+  
 }
 
 
@@ -42,7 +44,7 @@ function applyClickHandlers() {
     } else {
         $(".circlePiece").click(possibleMoves);
     }
-    $(".reset").click(reset);
+
 }
 
 
@@ -240,7 +242,7 @@ function move() {
     $("div").off();
     if (playerTurn === 0) {
         $(".trianglePiece").click(possibleMoves);
-        $(".king..trianglePiece").click()
+        $(".king.trianglePiece").click()
     } else {
         $(".circlePiece").click(possibleMoves);
     }
@@ -427,12 +429,11 @@ function checkWin(){
     }
     return false;
 }
-function deathCounter() {
-    debugger;
+function deathCounter() { //updates Counts for deaths 
     var p1deathcounter = $(".counterLeft");
     var p2deathcounter = $(".counterRight");
-    p1deathcounter.append(playerOneTokens);
-    p2deathcounter.append(playerTwoTokens);
+    p1deathcounter.text(playerOneTokens);
+    p2deathcounter.text(playerTwoTokens);
 }
 
 // turns on the highlights for selected 
@@ -491,6 +492,7 @@ function checkPawnOrKing(position, jumpPosition) {
                 $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
                 $("[coordinate=" + jumpPosition + "]").removeClass("trianglePiece");
                 $("[coordinate=" + position + "]").addClass("king circlePiece");
+              
    
             } else {
                 boardArray[lastX][lastY] = 0;
@@ -501,6 +503,7 @@ function checkPawnOrKing(position, jumpPosition) {
                 $("[coordinate=" + position + "]").addClass("circlePiece");
             }
             playerOneTokens--;
+            deathCounter();
             checkWin();
         }
         //player one turn, move triangle pieces
@@ -512,7 +515,6 @@ function checkPawnOrKing(position, jumpPosition) {
                 $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
                 $("[coordinate=" + jumpPosition + "]").removeClass("circlePiece");
                 $("[coordinate=" + position + "]").addClass("king trianglePiece");
-                
             } else {
                 boardArray[lastX][lastY] = 0;
                 boardArray[jumpX][jumpY] = 0;
@@ -522,6 +524,7 @@ function checkPawnOrKing(position, jumpPosition) {
                 $("[coordinate=" + position + "]").addClass("trianglePiece");
             }
             playerTwoTokens--;
+            deathCounter();
             checkWin();
         }
     } 
@@ -533,11 +536,13 @@ function checkPawnOrKing(position, jumpPosition) {
                 boardArray[thisX][thisY] = 4;
                 $("[coordinate=" + position + "]").addClass("king circlePiece");
                 $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
+               
             } else {
                 boardArray[lastX][lastY] = 0;
                 boardArray[thisX][thisY] = 2;
                 $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
                 $("[coordinate=" + position + "]").addClass("circlePiece");
+                
             }
         }
         // check and change if player 2 coin movement turns to king or not
@@ -548,11 +553,13 @@ function checkPawnOrKing(position, jumpPosition) {
                 boardArray[thisX][thisY] = 3;
                 $("[coordinate=" + position + "]").addClass("king trianglePiece");
                 $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
+              
             } else {
                 boardArray[lastX][lastY] = 0;
                 boardArray[thisX][thisY] = 1;
                 $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
                 $("[coordinate=" + position + "]").addClass("trianglePiece");
+               
             }
         }
 }
