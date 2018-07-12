@@ -208,7 +208,8 @@ function possibleMoves(x, y) {
 //update the movement with 1 or 2
 function move() {
     //position -> new position that we clicked on...the spot we want to move to
-    var position = $(this).attr("coordinate");
+    var position = $(this).attr("coordinate"); 
+    toKing(position);
     var thisX = parseInt(position[0]);
     var thisY = parseInt(position[1]);
     var lastPosition = currentPosition;
@@ -372,10 +373,10 @@ function jump() {
     $(".gameBoard div").removeClass("highlight");
 }
 
-function toKing () {
+function toKing (position) {
     var King= $(this);
-    if (player === 0) {
-       var King= $(this);
+    if (playerTurn === 0) {
+     if (position[0] === "0")
        King.addClass('king')
     }
     else {

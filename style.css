@@ -60,15 +60,15 @@ img {
 }
 
 .trianglePiece{
-    background-image: url("img/capacitor.png");
+    background-image: url("img/player1token.png");
     background-repeat: no-repeat;
-    background-size: cover; 
+    background-size: 100% 100%; 
 }
 
 .circlePiece{
-    background-image: url("img/circle.png");
+    background-image: url("img/player2token.png");
     background-repeat: no-repeat;
-    background-size: cover; 
+    background-size: 100% 100%; 
 }
 
 .highlight {
