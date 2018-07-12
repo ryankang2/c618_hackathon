@@ -10,7 +10,7 @@ var currentPosition = null;
 var jumpPosition = null;        //position of token thats being kileld
 
 // 0 = player 1 turn, 1 = player 2 turn;
-var playerTurn = 0;
+var playerTurn = parseInt(sessionStorage.playerTurn);
 var playerOneTokens = 12;
 var playerTwoTokens = 12;
 
@@ -31,12 +31,16 @@ function initializeApp() {
     // var testPiece = new Piece();
     createBoard();
     applyClickHandlers();
+    turnHighlight();
 }
 
 
 function applyClickHandlers() {
-    $(".trianglePiece").click(possibleMoves);
-    // $(".circlePiece").click(possibleMoves);
+    if (playerTurn === 0) {
+        $(".trianglePiece").click(possibleMoves);
+    } else {
+        $(".circlePiece").click(possibleMoves);
+    }
 }
 
 //populates the possibleMovesArray
@@ -275,6 +279,9 @@ function move() {
     } else {
         $(".circlePiece").click(possibleMoves);
     }
+    console.log(gameBoard);
+    turnHighlight();
+    $(".gameBoard div").removeClass("highlight");
 }
 
 //go thru possibleMovesArray, apply clickhandlers to those coordinates in array, highlight them on DOM 
@@ -301,11 +308,14 @@ function applyClickToPossible() {
     if (secondCoordinate === null) {
         // if only one possible movement and if jump is possible
         if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) || (Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2)) {
-            $("[coordinate=" + firstCoordinate + "]").click(jump);
+            $("[coordinate=" + firstCoordinate + "]").click(jump).addClass("highlight");
+
         } 
         // if only one possible movement and jump isn't possible;
         else {
-            $("[coordinate=" + firstCoordinate + "]").click(move);
+            $("[coordinate=" + firstCoordinate + "]").click(move).addClass("highlight");
+
+
         }
         return;
     } 
@@ -316,22 +326,20 @@ function applyClickToPossible() {
     // if two movement possible 
     if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) &&
         ((Math.abs(lastX - secondX) === 2 && Math.abs(lastY - secondY) === 2))) {
-        $("[coordinate=" + firstCoordinate + "]").click(jump);
-        $("[coordinate=" + secondCoordinate + "]").click(jump);
-    }
-     else if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) &&
+        $("[coordinate=" + firstCoordinate + "]").click(jump).addClass("highlight");
+        $("[coordinate=" + secondCoordinate + "]").click(jump).addClass("highlight");
+
+    } else if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) &&
         ((Math.abs(lastX - secondX) !== 2 && Math.abs(lastY - secondY) !== 2))) {
-        $("[coordinate=" + firstCoordinate + "]").click(jump);
-        $("[coordinate=" + secondCoordinate + "]").click(move);
-    }
-     else if ((Math.abs(lastX - firstX) !== 2 && Math.abs(lastY - firstY) !== 2) &&
+        $("[coordinate=" + firstCoordinate + "]").click(jump).addClass("highlight");
+        $("[coordinate=" + secondCoordinate + "]").click(move).addClass("highlight");
+    } else if ((Math.abs(lastX - firstX) !== 2 && Math.abs(lastY - firstY) !== 2) &&
         ((Math.abs(lastX - secondX) === 2 && Math.abs(lastY - secondY) === 2))) {
-        $("[coordinate=" + firstCoordinate + "]").click(move);
-        $("[coordinate=" + secondCoordinate + "]").click(jump);
-    }
-     else {
-        $("[coordinate=" + firstCoordinate + "]").click(move);
-        $("[coordinate=" + secondCoordinate + "]").click(move);
+        $("[coordinate=" + firstCoordinate + "]").click(move).addClass("highlight");
+        $("[coordinate=" + secondCoordinate + "]").click(jump).addClass("highlight");
+    } else {
+        $("[coordinate=" + firstCoordinate + "]").click(move).addClass("highlight");
+        $("[coordinate=" + secondCoordinate + "]").click(move).addClass("highlight");
     }
 }
 
@@ -403,6 +411,8 @@ function jump() {
     } else {
         $(".circlePiece").click(possibleMoves);
     }
+    turnHighlight();
+    $(".gameBoard div").removeClass("highlight");
 }
 
 //function to dynamically create board
@@ -450,4 +460,14 @@ function checkWin(){
         return true;
     }
     return false;
+}
+
+function turnHighlight () {
+    if (playerTurn === 0) {
+        $(".left .avatar").addClass("highlight");
+        $(".right .avatar").removeClass("highlight");
+    } else {
+        $(".right .avatar").addClass("highlight");
+        $(".left .avatar").removeClass("highlight");
+    }
 }
