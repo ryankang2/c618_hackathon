@@ -45,6 +45,10 @@ function applyClickHandlers() {
 
 //populates the possibleMovesArray
 function possibleMoves(x, y) {
+    // if($(this).hasClass("circlePiece") === true || $(this).hasClass("trianglePiece") === true){
+    //     console.log("true");
+    //     return;
+    // }
     possibleMovesArray = []; //reset global array
     currentPosition = $(this).attr("coordinate");
 
@@ -200,52 +204,6 @@ function possibleMoves(x, y) {
     console.log("possible Array: ", possibleMovesArray);
 }
 
-//subfunction to monitor player one movement
-function playerOneMovement(x, y) {
-    //check if both spots are empty
-    if (boardArray[x - 1][y - 1] === 0 && boardArray[x - 1][y + 1] === 0) {
-        var firstCoordinate = "" + (x - 1) + (y - 1);
-        var secondCoordinate = "" + (x - 1) + (y + 1);
-        possibleMovesArray.push(firstCoordinate, secondCoordinate);
-        console.log("possibleMovesArray: ", possibleMovesArray);
-    }
-    //if piece cant make a left movement but can make right
-    if (boardArray[x - 1][y + 1] === 0 && boardArray[x - 1][y - 1] !== 0) {
-        var firstCoordinate = "" + (x - 1) + (y + 1);
-        possibleMovesArray.push(firstCoordinate);
-        console.log("possibleMovesArray: ", possibleMovesArray);
-    }
-    //if piece cant make a right movement can make left
-    if (boardArray[x - 1][y - 1] === 0 && boardArray[x - 1][y + 1] !== 0) {
-        var firstCoordinate = "" + (x - 1) + (y - 1);
-        possibleMovesArray.push(firstCoordinate);
-        console.log("possibleMovesArray: ", possibleMovesArray);
-    }
-}
-
-//subfunction to monitory player two movement
-function playerTwoMovement(x, y) {
-    //check if both spots are empty
-    if (boardArray[x + 1][y + 1] === 0 && boardArray[x + 1][y - 1] === 0) {
-        var firstCoordinate = "" + (x + 1) + (y + 1);
-        var secondCoordinate = "" + (x + 1) + (y - 1);
-        possibleMovesArray.push(firstCoordinate, secondCoordinate);
-        console.log("possibleMovesArray: ", possibleMovesArray);
-    }
-    //if piece cant make a left movement but can make right
-    if (boardArray[x + 1][y - 1] !== 0 && boardArray[x + 1][y + 1] === 0) {
-        var firstCoordinate = "" + (x + 1) + (y + 1);
-        possibleMovesArray.push(firstCoordinate);
-        console.log("possibleMovesArray: ", possibleMovesArray);
-    }
-    //if piece cant make a right movement can make left
-    if (boardArray[x + 1][y - 1] === 0 && boardArray[x + 1][y + 1] !== 0) {
-        var firstCoordinate = "" + (x + 1) + (y - 1);
-        possibleMovesArray.push(firstCoordinate);
-        console.log("possibleMovesArray: ", possibleMovesArray);
-    }
-}
-
 //with the possible moves, take one route, update the boardArray, replace current position with 0 
 //update the movement with 1 or 2
 function move() {
@@ -279,7 +237,7 @@ function move() {
     } else {
         $(".circlePiece").click(possibleMoves);
     }
-    console.log(gameBoard);
+    // console.log(gameBoard);
     turnHighlight();
     $(".gameBoard div").removeClass("highlight");
 }
@@ -287,7 +245,6 @@ function move() {
 //go thru possibleMovesArray, apply clickhandlers to those coordinates in array, highlight them on DOM 
 function applyClickToPossible() {
     // splitting x and y
-
     var firstCoordinate = null;
     var secondCoordinate = null;
     for(var i = 0; i < possibleMovesArray.length; i++){
@@ -298,7 +255,6 @@ function applyClickToPossible() {
             secondCoordinate = possibleMovesArray[i];
         }
     }
-
     var firstX = firstCoordinate[0];    //x coordinate of first array index
     var firstY = firstCoordinate[1];    //y coordinate of first array index
     var lastPosition = currentPosition;
@@ -314,14 +270,16 @@ function applyClickToPossible() {
         // if only one possible movement and jump isn't possible;
         else {
             $("[coordinate=" + firstCoordinate + "]").click(move).addClass("highlight");
-
-
         }
         return;
     } 
     else{
         var secondX = secondCoordinate[0];
         var secondY = secondCoordinate[1];
+    }
+    //if highlighted squares already have class highlight, return
+    if($("[coordinate=" + firstCoordinate + "]").hasClass("highlight") && $("[coordinate=" + secondCoordinate + "]").hasClass("highlight")){
+        return;
     }
     // if two movement possible 
     if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) &&
@@ -341,11 +299,6 @@ function applyClickToPossible() {
         $("[coordinate=" + firstCoordinate + "]").click(move).addClass("highlight");
         $("[coordinate=" + secondCoordinate + "]").click(move).addClass("highlight");
     }
-}
-
-//remove the triangle/circle class
-function display() {
-
 }
 
 
