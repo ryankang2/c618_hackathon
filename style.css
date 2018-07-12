@@ -9,9 +9,15 @@ body {
 }
 
 .header {
-    height: 15%;
+    height: 13%;
     display: flex;
     justify-content: center;
+}
+
+.header img {
+    position: absolute;
+    height: 20%;
+    top: -3.5%;
 }
 
 .middleSection {
@@ -66,6 +72,18 @@ img {
 }
 
 .circlePiece{
+    background-image: url("img/circle.png");
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+
+.king.trianglePiece {
+    background-image: url("img/fidget.png");
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+
+.king.circlePiece {
     background-image: url("img/circle.png");
     background-repeat: no-repeat;
     background-size: cover; 

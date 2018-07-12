@@ -286,8 +286,14 @@ function move() {
 
 //go thru possibleMovesArray, apply clickhandlers to those coordinates in array, highlight them on DOM 
 function applyClickToPossible() {
+    // turn off click and enable again to prevent changing coin choice
+    $("div").off().removeClass("highlight");
+    if (playerTurn === 0) {
+        $(".trianglePiece").click(possibleMoves);
+    } else {
+        $(".circlePiece").click(possibleMoves);
+    }
     // splitting x and y
-
     var firstCoordinate = null;
     var secondCoordinate = null;
     for(var i = 0; i < possibleMovesArray.length; i++){
@@ -305,6 +311,8 @@ function applyClickToPossible() {
     var lastX = parseInt(lastPosition[0]);  //current x position 
     var lastY = parseInt(lastPosition[1]);  //current y position 
     
+    if (possibleMovesArray )
+
     if (secondCoordinate === null) {
         // if only one possible movement and if jump is possible
         if ((Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2) || (Math.abs(lastX - firstX) === 2 && Math.abs(lastY - firstY) === 2)) {
