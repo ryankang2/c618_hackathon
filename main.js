@@ -200,39 +200,6 @@ function possibleMoves(x, y) {
 //update the movement with 1 or 2
 function move() {
     //position -> new position that we clicked on...the spot we want to move to
-<<<<<<< HEAD
-    var position = $(this).attr("coordinate"); 
-    var thisX = parseInt(position[0]);
-    var thisY = parseInt(position[1]);
-    var lastPosition = currentPosition;
-    var lastX = parseInt(lastPosition[0]);
-    var lastY = parseInt(lastPosition[1]);
-    //if player 2 turn, move the circle pieces
-    if (playerTurn === 1) {
-        if(thisX === 7){
-            console.log("KING CIRCLE");
-        }
-        //king for player 2 -> 4
-        boardArray[lastX][lastY] = 0;
-        boardArray[thisX][thisY] = 4;
-        $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
-        $("[coordinate=" + position + "]").addClass("circlePiece");
-        playerTurn = 1 - playerTurn;
-    }
-    //player one turn, move triangle pieces
-    else {
-        if(thisX === 0){
-            console.log("KING TRIANGLE");
-        }
-        //king for player1 -> 3
-        boardArray[lastX][lastY] = 0;
-        boardArray[thisX][thisY] = 3;
-        $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
-        $("[coordinate=" + position + "]").addClass("trianglePiece");
-        playerTurn = 1 - playerTurn;
-        
-    }
-=======
     var position = $(this).attr("coordinate");
     // var thisX = parseInt(position[0]);
     // var thisY = parseInt(position[1]);
@@ -242,7 +209,6 @@ function move() {
     //if player 2 turn, move the circle pieces
     checkPawnOrKing(position);
     playerTurn = 1 - playerTurn;
->>>>>>> 1035280c4662338d2098cecdfe69b9cb76bff208
     //turn off all divs, but apply click handler to next player's pieces
     $("div").off();
     if (playerTurn === 0) {
@@ -257,12 +223,7 @@ function move() {
 //go thru possibleMovesArray, apply clickhandlers to those coordinates in array, highlight them on DOM 
 function applyClickToPossible() {
     // turn off click and enable again to prevent changing coin choice
-<<<<<<< HEAD
-
-    // $("div").off().removeClass("highlight");
-=======
     $(".gameBoard div").off().removeClass("highlight");
->>>>>>> 1035280c4662338d2098cecdfe69b9cb76bff208
     if (playerTurn === 0) {
         $(".trianglePiece").click(possibleMoves);
     } else {
@@ -336,7 +297,7 @@ function jump() {
     var lastX = parseInt(lastPosition[0]);  //position before jump
     var lastY = parseInt(lastPosition[1]);
 
-    //player1's turn, move up the board
+    //making jumpPosition based on choice
     if (playerTurn === 0) {
         if (thisY > lastY) {
             jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY - 1);
@@ -353,31 +314,9 @@ function jump() {
             jumpPosition = Math.abs(thisX - 1) + "" + Math.abs(thisY + 1);
         }
     }
-    
-    var jumpX = parseInt(jumpPosition[0]);
-    var jumpY = parseInt(jumpPosition[1]);
-    //if player 2 turn, move the circle pieces, and kill the item in the middle
-    if (playerTurn === 1) {
-        boardArray[lastX][lastY] = 0;
-        boardArray[jumpX][jumpY] = 0;
-        boardArray[thisX][thisY] = 2;
 
-        $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
-        $("[coordinate=" + jumpPosition + "]").removeClass("trianglePiece");
-        $("[coordinate=" + position + "]").addClass("circlePiece");
-        playerTurn = 1 - playerTurn;
-    }
-    //player one turn, move triangle pieces
-    else {
-        
-        boardArray[lastX][lastY] = 0;
-        boardArray[jumpX][jumpY] = 0;
-        boardArray[thisX][thisY] = 1;
-        $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
-        $("[coordinate=" + jumpPosition + "]").removeClass("circlePiece");
-        $("[coordinate=" + position + "]").addClass("trianglePiece");
-        playerTurn = 1 - playerTurn;
-    }
+    checkPawnOrKing(position, jumpPosition);
+
     $("div").off();
     if (playerTurn === 0) {
         $(".trianglePiece").click(possibleMoves);
@@ -386,6 +325,10 @@ function jump() {
     }
     turnHighlight();
     $(".gameBoard div").removeClass("highlight");
+    
+    playerTurn = 1 - playerTurn;
+    // change flag for checkPawnOrKing function
+    jumpPosition = null;
 }
 
 
@@ -471,38 +414,80 @@ function reset(){
     initializeApp();
 }
 
-function checkPawnOrKing(position) {
+function checkPawnOrKing(position, jumpPosition) {
     var thisX = parseInt(position[0]);
     var thisY = parseInt(position[1]);
     var lastPosition = currentPosition;
     var lastX = parseInt(lastPosition[0]);
     var lastY = parseInt(lastPosition[1]);
-    // check and change if player 2 coin movement turns to king or not
-    if (playerTurn === 1) {
-        if(thisX === 7){
-            console.log("KING CIRCLE");
-            boardArray[lastX][lastY] = 0;
-            boardArray[thisX][thisY] = 4;
-            $("[coordinate=" + position + "]").addClass("king");
-        } else {
-            boardArray[lastX][lastY] = 0;
-            boardArray[thisX][thisY] = 2;
-            $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
-            $("[coordinate=" + position + "]").addClass("circlePiece");
+    // for jump();
+    if (jumpPosition != null) {
+        var jumpX = parseInt(jumpPosition[0]);
+        var jumpY = parseInt(jumpPosition[1]);
+        if (playerTurn === 1) {
+            if (thisX === 7) {
+                boardArray[lastX][lastY] = 0;
+                boardArray[jumpX][jumpY] = 0;
+                boardArray[thisX][thisY] = 4;
+                $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
+                $("[coordinate=" + jumpPosition + "]").removeClass("trianglePiece");
+                $("[coordinate=" + position + "]").addClass("king circlePiece");
+            } else {
+                boardArray[lastX][lastY] = 0;
+                boardArray[jumpX][jumpY] = 0;
+                boardArray[thisX][thisY] = 2;
+                $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
+                $("[coordinate=" + jumpPosition + "]").removeClass("trianglePiece");
+                $("[coordinate=" + position + "]").addClass("circlePiece");
+            }
         }
-    }
-    // check and change if player 2 coin movement turns to king or not
-    else {
-        if(thisX === 0){
-            console.log("KING TRIANGLE");
-            boardArray[lastX][lastY] = 0;
-            boardArray[thisX][thisY] = 3;
-            $("[coordinate=" + lastPosition + "]").addClass("king");
-        } else {
-            boardArray[lastX][lastY] = 0;
-            boardArray[thisX][thisY] = 1;
-            $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
-            $("[coordinate=" + position + "]").addClass("trianglePiece");
+        //player one turn, move triangle pieces
+        else {
+            if (thisX === 0) {
+                boardArray[lastX][lastY] = 0;
+                boardArray[jumpX][jumpY] = 0;
+                boardArray[thisX][thisY] = 3;
+                $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
+                $("[coordinate=" + jumpPosition + "]").removeClass("circlePiece");
+                $("[coordinate=" + position + "]").addClass("king trianglePiece");
+            } else {
+                boardArray[lastX][lastY] = 0;
+                boardArray[jumpX][jumpY] = 0;
+                boardArray[thisX][thisY] = 1;
+                $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
+                $("[coordinate=" + jumpPosition + "]").removeClass("circlePiece");
+                $("[coordinate=" + position + "]").addClass("trianglePiece");
+            }
         }
-    }
+    } else {
+        if (playerTurn === 1) {
+            if(thisX === 7){
+                console.log("KING CIRCLE");
+                boardArray[lastX][lastY] = 0;
+                boardArray[thisX][thisY] = 4;
+                $("[coordinate=" + position + "]").addClass("king circlePiece");
+                $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
+            } else {
+                boardArray[lastX][lastY] = 0;
+                boardArray[thisX][thisY] = 2;
+                $("[coordinate=" + lastPosition + "]").removeClass("circlePiece");
+                $("[coordinate=" + position + "]").addClass("circlePiece");
+            }
+        }
+        // check and change if player 2 coin movement turns to king or not
+        else {
+            if(thisX === 0){
+                console.log("KING TRIANGLE");
+                boardArray[lastX][lastY] = 0;
+                boardArray[thisX][thisY] = 3;
+                $("[coordinate=" + position + "]").addClass("king trianglePiece");
+                $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
+            } else {
+                boardArray[lastX][lastY] = 0;
+                boardArray[thisX][thisY] = 1;
+                $("[coordinate=" + lastPosition + "]").removeClass("trianglePiece");
+                $("[coordinate=" + position + "]").addClass("trianglePiece");
+            }
+        }
+}
 }
