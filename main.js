@@ -287,7 +287,7 @@ function move() {
 //go thru possibleMovesArray, apply clickhandlers to those coordinates in array, highlight them on DOM 
 function applyClickToPossible() {
     // turn off click and enable again to prevent changing coin choice
-    $("div").off().removeClass("highlight");
+    $(".gameBoard div").off().removeClass("highlight");
     if (playerTurn === 0) {
         $(".trianglePiece").click(possibleMoves);
     } else {
