@@ -74,9 +74,7 @@ function kingMoves(x, y) {
             array2.push(coordinate);
         }
     }
-    console.log("fakeArray: ", fakeArray);
     possibleMovesArray = array2.slice();
-    console.log("POSSIBle: ", possibleMovesArray);
 }
 
 //populates the possibleMovesArray
@@ -84,7 +82,6 @@ function possibleMoves(x, y) {
     possibleMovesArray = []; //reset global array
     currentPosition = $(this).attr("coordinate");
 
-    console.log("coordinate that I clicked: ", currentPosition);
     var x = parseInt(currentPosition[0]);
     var y = parseInt(currentPosition[1]);
     if (boardArray[x][y] == 3 || boardArray[x][y] == 4) {
@@ -161,7 +158,6 @@ function possibleMoves(x, y) {
     if (boardArray[x][y] === 2) {
         //check if left/right are same team
         if (boardArray[x + 1][y + 1] === 2 && boardArray[x + 1][y - 1] === 2) {
-            console.log("Here player2");
             return;
         }
         //if both spaces are empty
@@ -228,7 +224,6 @@ function possibleMoves(x, y) {
         }
     }
     applyClickToPossible();
-    console.log("possible Array: ", possibleMovesArray);
 }
 
 //with the possible moves, take one route, update the boardArray, replace current position with 0 
@@ -443,12 +438,10 @@ function checkWin() {
     var msg = null;
     if (playerOneTokens === 0) {
         msg = "Player Two Won!"
-        console.log(msg);
         return true;
     }
     if (playerTwoTokens === 0) {
         msg = "Player One Won!";
-        console.log(msg);
         return true;
     }
     return false;
@@ -473,7 +466,6 @@ function turnHighlight() {
 
 //resets game
 function reset() {
-    console.log("button pressed");
     $(".gameBoard").empty();
     $(".reset").off();
     playerOneTokens = 12;
@@ -626,7 +618,6 @@ function checkPawnOrKing(position, jumpPosition) {
         } else {
             if (playerTurn === 1) {
                 if (thisX === 7) {
-                    console.log("KING CIRCLE");
                     boardArray[lastX][lastY] = 0;
                     boardArray[thisX][thisY] = 4;
                     $("[coordinate=" + position + "]").addClass("king circlePiece");
@@ -641,7 +632,6 @@ function checkPawnOrKing(position, jumpPosition) {
             // check and change if player 2 coin movement turns to king or not
             else {
                 if (thisX === 0) {
-                    console.log("KING TRIANGLE");
                     boardArray[lastX][lastY] = 0;
                     boardArray[thisX][thisY] = 3;
                     $("[coordinate=" + position + "]").addClass("king trianglePiece");
