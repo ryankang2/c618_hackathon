@@ -165,3 +165,64 @@ img {
     width: 15%;
     align-items: center;
 }
+
+/* modal */
+
+.modal_img {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.shadow {
+    display: none;
+}
+
+.modal-content {
+    background-color: cyan;
+    margin: 2% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    text-align: center;
+}
+
+.modal_image {
+    width: 50%;
+    display: inline-block;
+}
+
+.modal_text {
+    float: right;
+    font-size: 1.8em;
+    padding-top: 14%;
+    padding-right: 7%;
+}
+
+.close {
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover {
+    cursor: pointer;
+}
+
+.about_image {
+    width: 40%;
+}

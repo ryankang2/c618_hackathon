@@ -34,7 +34,7 @@ function initializeApp() {
     turnHighlight();
     deathCounter();
     $(".reset").click(reset);
-  
+
 }
 
 
@@ -44,7 +44,9 @@ function applyClickHandlers() {
     } else {
         $(".circlePiece").click(possibleMoves);
     }
-
+    $(".close").click(function() {
+        $("#win_modal").addClass("shadow");
+    })
 }
 
 
@@ -395,6 +397,7 @@ function jump() {
     turnHighlight();
     deathCounter();
     $(".gameBoard div").removeClass("highlight");
+    checkWin();
     // change flag for checkPawnOrKing function
     jumpPosition = null;
 }
@@ -437,11 +440,13 @@ function createBoard() {
 function checkWin() {
     var msg = null;
     if (playerOneTokens === 0) {
-        msg = "Player Two Won!"
+        $("#win_modal").removeClass("shadow");
+        $(".winner_text").text("Player 2 Wins!");
         return true;
     }
     if (playerTwoTokens === 0) {
-        msg = "Player One Won!";
+        $("#win_modal").removeClass("shadow");
+        $(".winner_text").text("Player 1 Wins!");
         return true;
     }
     return false;
