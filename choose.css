@@ -1,0 +1,45 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    background-color: black;
+    /* background-image: url(img/building.png);
+    background-repeat: no-repeat;
+    background-size: cover; */
+}
+
+.header {
+    height: 15%;
+    display: flex;
+    justify-content: center;
+}
+
+.fade {
+    animation: fadeout 3s ease;
+}
+
+.middleSection {
+    display: flex;
+    justify-content: center;
+    height: 85%;
+}
+
+.left 
+
+.player {
+    width: 40%;
+    height: 78vh;
+    display: inline-block;
+    border: 1px solid white;
+}
+
+img {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+@keyframes fadeout {
+    from {opacity: 1}
+    to {opacity: 0}
+}

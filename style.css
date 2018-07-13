@@ -1,0 +1,228 @@
+@font-face {
+    font-family: neon;
+    src: url("font/AUTOMANI.TTF");
+
+}
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    background-color: black;
+    /* background-image: url(img/building.png);
+    background-repeat: no-repeat;
+    background-size: cover; */
+}
+
+.header {
+    height: 10%;
+    display: flex;
+    justify-content: center;
+}
+
+.header img {
+    position: absolute;
+    height: 20%;
+    top: -5.0%;
+}
+
+.middleSection {
+    display: flex;
+    justify-content: center;
+    height: 88%;
+}
+
+.player {
+    width: 9.5%;
+    height: 95%;
+    display: inline-block;
+    border: 1px solid white;
+    position: relative;
+}
+
+.avatar {
+    box-sizing: border-box;
+    position: relative;
+}
+.counterLeft {
+    display: flex;
+    font-size: 3vh;
+    font-family: neon;
+    color: #09CEEC;
+    opacity: 0.7;
+    text-align: center;
+    flex-direction: column;
+}
+
+.counterRight {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 3vh;
+    font-family: neon;
+    color: #ef155d;
+}
+
+.tokensTaken {
+    height: 75%;
+    position: absolute;
+    bottom: 0;
+}
+
+.tokensTaken img {
+    height: 30%;
+    position : relative;
+    
+}
+
+.right.tokensTaken {
+    height: 75%;
+
+}
+
+.right .avatar {
+    position: absolute;
+    bottom: 0;
+}
+
+.gameBoard {
+    width: 48%;
+    height: 95%;
+    display: inline-block;
+    border: 1px solid white;
+}
+
+img {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.light {
+    background-color: #09CEEC;
+}
+
+.dark {
+    background-color: black;
+}
+
+.square {
+    display: inline-block;
+    height: 100%;
+    width: 12.5%;
+}
+
+.row {
+    display: flex;
+    height: 12.5%;
+}
+
+.trianglePiece{
+    background-image: url("img/blueCircle.png");
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: center;
+}
+
+.circlePiece{
+    background-image: url("img/rainbow.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+}
+
+.king.trianglePiece {
+    background-image: url("img/kingBlue.png");
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: center;
+}
+
+.king.circlePiece {
+    background-image: url("img/kingRed.png");
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: center;
+}
+
+.highlight {
+    box-sizing: border-box;
+    border: 5px solid white;
+}
+
+.resetContainer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.reset {
+    /* display: flex;
+    justify-content: center; */
+    position: absolute;
+    bottom: 0;
+    right: 0%;
+    width: 15%;
+    align-items: center;
+}
+
+/* modal */
+
+.modal_img {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.shadow {
+    display: none;
+}
+
+.modal-content {
+    background-color: cyan;
+    margin: 2% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    text-align: center;
+}
+
+.modal_image {
+    width: 50%;
+    display: inline-block;
+}
+
+.modal_text {
+    float: right;
+    font-size: 1.8em;
+    padding-top: 14%;
+    padding-right: 7%;
+}
+
+.close {
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover {
+    cursor: pointer;
+}
+
+.about_image {
+    width: 40%;
+}
