@@ -312,12 +312,30 @@ function jump() {
     // need to add king opposite
     if (playerTurn === 0) {
         if(boardArray[lastX][lastY] === 3){
-            if (thisY > lastY) {
-                jumpPosition = Math.abs(thisX - 1) + "" + Math.abs(thisY - 1);
-            } else {
-                jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY + 1);
+             //right direction
+             if (thisY > lastY) {
+                //up
+                if(thisX < lastX){
+                    jumpPosition = Math.abs(lastX - 1) + "" + Math.abs(thisY-1);
+                }
+                //down
+                else{   
+                    jumpPosition = Math.abs(thisX - 1) + "" + Math.abs(thisY -1);
+                }   
+            } 
+            //left direction
+            else {
+                //up
+                if(thisX < lastX){
+                    jumpPosition = Math.abs(lastX-1) + "" + Math.abs(lastY-1);
+                }
+                //down
+                else{
+                    jumpPosition = Math.abs(thisX - 1) + "" + Math.abs(lastY-1);
+                }
             }
         }
+        //for pawns
         else{
             if (thisY > lastY) {
                 jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY - 1);
@@ -326,13 +344,32 @@ function jump() {
             }
         }
     }
+    //                jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY - 1);
+
     if (playerTurn === 1) {
         //for kings
         if(boardArray[lastX][lastY] === 4){
+            //right direction
             if (thisY > lastY) {
-                jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY - 1);
-            } else {
-                jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY + 1);
+                //up
+                if(thisX < lastX){
+                    jumpPosition = Math.abs(lastX - 1) + "" + Math.abs(thisY-1);
+                }
+                //down
+                else{   
+                    jumpPosition = Math.abs(thisX - 1) + "" + Math.abs(thisY -1);
+                }   
+            } 
+            //left direction
+            else {
+                //up
+                if(thisX < lastX){
+                    jumpPosition = Math.abs(lastX-1) + "" + Math.abs(lastY-1);
+                }
+                //down
+                else{
+                    jumpPosition = Math.abs(thisX - 1) + "" + Math.abs(lastY-1);
+                }
             }
         }
         //for pawns
