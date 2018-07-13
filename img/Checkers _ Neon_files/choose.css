@@ -36,8 +36,8 @@ body {
 .player1 img{
     display: flex;
     justify-content: center;
+    align-content: center;
     width: 85%;
-    margin: 10% auto 0;
 }
 
 img {
