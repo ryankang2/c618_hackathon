@@ -49,14 +49,14 @@ function applyClickHandlers() {
     })
 }
 
-
+//populate possibleMovesArray with possible king moves
 function kingMoves(x, y) {
+    //fakeArray will hold ALL the positions around the king except for edge pieces
     var fakeArray = [];
     for (var i = x - 2; i <= x + 2; i++) {
         for (var j = y - 2; j <= y + 2; j++) {
             //takes care of kings on edge
             if (i > 7 || i < 0 || j < 0 || j > 7) {
-                
             } 
             else {
                 if (boardArray[i][j] !== boardArray[x][y]) {
@@ -65,6 +65,7 @@ function kingMoves(x, y) {
             }
         }
     }
+    //array2 will hold all valid diagonal positions around king
     var array2 = [];
     for (var iter = 0; iter < fakeArray.length; iter++) {
         var coordinate = fakeArray[iter];
@@ -72,7 +73,7 @@ function kingMoves(x, y) {
         var yCoord = coordinate[1];
         if (xCoord != x && yCoord != y && boardArray[xCoord][yCoord] == 0 &&
             ((Math.abs(xCoord - x) === 1 && Math.abs(yCoord - y) == 1) ||
-                (Math.abs(yCoord - y) == 2 && Math.abs(xCoord - x) == 2))) {
+            (Math.abs(yCoord - y) == 2 && Math.abs(xCoord - x) == 2))){
             array2.push(coordinate);
         }
     }
@@ -292,7 +293,6 @@ function applyClickToPossible() {
             $("[coordinate=" + nextPosition + "]").click(move).addClass("highlight");
         }
     }
-
 }
 
 
@@ -304,7 +304,6 @@ function jump() {
     var lastPosition = currentPosition;
     var lastX = parseInt(lastPosition[0]); //position before jump
     var lastY = parseInt(lastPosition[1]);
-    debugger;
     //making jumpPosition based on choice
     // need to add king opposite
     if (playerTurn === 0) {
@@ -377,12 +376,6 @@ function jump() {
                 jumpPosition = Math.abs(thisX - 1) + "" + Math.abs(thisY + 1);
             }
         }
-
-        // if (thisY > lastY) {
-        //     jumpPosition = Math.abs(thisX - 1) + "" + Math.abs(thisY - 1);
-        // } else {
-        //     jumpPosition = Math.abs(thisX + 1) + "" + Math.abs(thisY + 1);
-        // }
     }
 
     checkPawnOrKing(position, jumpPosition);
