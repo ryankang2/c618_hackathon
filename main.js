@@ -34,7 +34,7 @@ function initializeApp() {
     turnHighlight();
     deathCounter();
     $(".reset").click(reset);
-  
+
 }
 
 
@@ -347,6 +347,7 @@ function jump() {
     }
     turnHighlight();
     $(".gameBoard div").removeClass("highlight");
+    checkWin();
     // change flag for checkPawnOrKing function
     jumpPosition = null;
 }
