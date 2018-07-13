@@ -44,7 +44,9 @@ function applyClickHandlers() {
     } else {
         $(".circlePiece").click(possibleMoves);
     }
-
+    $(".close").click(function() {
+        $("#win_modal").addClass("shadow");
+    })
 }
 
 
@@ -387,13 +389,13 @@ function createBoard() {
 function checkWin() {
     var msg = null;
     if (playerOneTokens === 0) {
-        msg = "Player Two Won!"
-        console.log(msg);
+        $("#win_modal").removeClass("shadow");
+        $(".winner_text").text("Player 2 Wins!");
         return true;
     }
     if (playerTwoTokens === 0) {
-        msg = "Player One Won!";
-        console.log(msg);
+        $("#win_modal").removeClass("shadow");
+        $(".winner_text").text("Player 1 Wins!");
         return true;
     }
     return false;
